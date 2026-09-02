@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// LOFC variant: TIME-ACCURATE transient (physical seconds), not a pseudo-steady
+// sweep. Starts from the normal-operation steady field at t=0 -- the instant forced
+// cooling is lost -- and marches the solid decay-heat conduction cooldown to the
+// quasi-steady peak. Delivers the peak fuel (margin to TRISO 1600 C) and the cooldown
+// time-constant tau.
+//
+// Solid-only: only the diffusion number limits stability. Implicit Euler is
+// unconditionally stable and the cooldown is smooth, so maxDi is set very high and the
+// step is capped by maxDeltaT instead (temporal accuracy dt/tau << 1). The damped ramp
+// (<=1.2x/step) starts from deltaT = 1 s so the initial surface-radiation adjustment at
+// the newly-radiating periphery is resolved before the step coarsens.
+application     chtMultiRegionTFoam;
+
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         30000;       // physical seconds (~3 lumped time-constants)
+deltaT          1;           // initial step [s]; ramps under adjustTimeStep
+
+adjustTimeStep  yes;
+maxCo           1;           // fluid region dropped -> inactive
+maxDi           1e6;         // Euler is stable; let maxDeltaT govern the step
+maxDeltaT       100;         // cap [s] -> dt/tau ~ 1e-2, good for the tau fit
+
+writeControl    adjustableRunTime;
+writeInterval   500;         // snapshot every 500 s (~60 frames over the cooldown)
+purgeWrite      0;
+writeFormat     ascii;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+
+// ************************************************************************* //

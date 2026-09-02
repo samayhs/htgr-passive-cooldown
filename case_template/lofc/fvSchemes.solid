@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system/solid";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// LOFC variant: TRANSIENT ddt (Euler). The base case uses steadyState (ddt term
+// vanishes); here the physical cooldown is time-accurate, so rho*Cp(T) dT/dt is
+// active -- this is exactly the term Cp(T) governs (thermal inertia). First-order
+// Euler is unconditionally stable and adequate for the smooth, slow (tau ~ 1e4 s)
+// decay-heat cooldown; the rest of the schemes match the base case.
+
+ddtSchemes
+{
+    default         Euler;
+}
+gradSchemes
+{
+    default         Gauss linear;
+}
+divSchemes
+{
+    default         none;
+}
+laplacianSchemes
+{
+    default         Gauss linear limited corrected 0.33;
+}
+interpolationSchemes
+{
+    default         linear;
+}
+snGradSchemes
+{
+    default         limited corrected 0.33;
+}
+
+// ************************************************************************* //

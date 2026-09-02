@@ -1,0 +1,1346 @@
+
+===PAGE 1===
+ 
+ 
+This is an accepted manuscript of a paper intended for publication in a 
+journal. This document was prepared as an account of work sponsored by 
+an agency of the United States Government. Neither the United States 
+Government nor any agency thereof, or any of their employees, makes any 
+warranty, expressed or implied, or assumes any legal liability or 
+responsibility for any third party’s use, or the results of such use, of any 
+information, apparatus, product or process disclosed in this report, or 
+represents that its use by such third party would not infringe privately owned 
+rights. The views expressed in this paper are not necessarily those of the 
+United States Government or the sponsoring agency. 
+ 
+ 
+Prepared for the U.S. Department of Energy 
+Office of Nuclear Energy 
+Under DOE Idaho Operations Office 
+Contract DE-AC07-05ID14517 
+ 
+ 
+INL/JOU-14-33637 
+Accepted Manuscript 
+Comparison of the 
+PHISICS/RELAP5-3D 
+Ring and Block Model 
+Results for Phase I of the 
+OECD/NEA MHTGR-350 
+Benchmark 
+ 
+ 
+ 
+G. Strydom, A. S. Epiney,  
+A. Alfonsi, C. Rabiti 
+ 
+ 
+ 
+January 2016 
+ 
+===PAGE 2===
+1 
+ 
+Comparison of the PHISICS/RELAP5-3D Ring and Block Model Results for Phase I 
+of the OECD/NEA MHTGR-350 Benchmark  
+ 
+G. STRYDOM a*, A. S. EPINEY b, A. ALFONSI a, C. RABITI a 
+a Idaho National Laboratory: Nuclear Science and Technology Division 
+2525 N. Fremont Avenue, Idaho Falls, Idaho 83415 
+Tel: (208) 526-1216, Fax: (208) 526-2930, Email:gerhard.strydom@inl.gov 
+ 
+b Paul Scherer Institute: Laboratory for Reactor Physics and Systems Behaviour (LRS) 
+5232 Villigen-PSI, Switzerland 
+ 
+ 
+ 
+Number of pages: 58 total, 28 text only 
+Number of tables: 6 
+Number of figures: 23 
+ 
+ 
+* Corresponding author 
+===PAGE 3===
+2 
+ 
+Keywords: 
+RELAP5-3D, MHTGR-350, OECD, PHISICS  
+===PAGE 4===
+3 
+ 
+ 
+Abstract 
+The PHISICS code system has been under development at INL since 2010. It consists 
+of several modules providing improved coupled core simulation capability: INSTANT 
+(3D nodal transport core calculations), MRTAU (depletion and decay heat generation) 
+and modules performing criticality searches, fuel shuffling and generalized perturbation. 
+Coupling of the PHISICS code suite to the thermal hydraulics system code RELAP5-3D 
+was finalized in 2013, and as part of the verification and validation effort the first phase 
+of the OECD/NEA MHTGR-350 Benchmark has now been completed.  
+The theoretical basis and latest development status of the coupled PHISICS/RELAP5-
+3D tool are described in more detail in a concurrent paper. This paper provides an 
+overview of the OECD/NEA MHTGR-350 Benchmark and presents the results of 
+Exercises 2 and 3 defined for Phase I. Exercise 2 required the modelling of a stand-
+alone thermal fluids solution at End of Equilibrium Cycle for the Modular High 
+Temperature Reactor (MHTGR). The RELAP5-3D results of four sub-cases are 
+discussed, consisting of various combinations of coolant bypass flows and material 
+thermophysical properties. Exercise 3 required a coupled neutronics and thermal fluids 
+solution, and the PHISICS/RELAP5-3D code suite was used to calculate the results of 
+two sub-cases.   
+The main focus of the paper is a comparison of results obtained with the traditional 
+RELAP5-3D “ring” model approach against a much more detailed model that include 
+kinetics feedback on individual block level and thermal feedbacks on a triangular sub-
+mesh. The higher fidelity that can be obtained by this “block” model is illustrated with 
+comparison results on the temperature, power density and flux distributions. It is shown 
+===PAGE 5===
+4 
+ 
+that the ring model leads to significantly lower  fuel temperatures (up to 10%) when 
+compared with the higher fidelity block model, and that the additional model 
+development and run-time efforts are worth the gains obtained in the improved spatial 
+temperature and flux distributions. 
+Keywords: HTGR, RELAP5-3D, PHISICS 
+I. INTRODUCTION 
+ 
+The High Temperature Gas-Cooled Reactor (HTGR) Methods Core Simulation group 
+at the Idaho National Laboratory (INL) leads the development of the Organization for 
+Economic Cooperation and Development (OECD) MHTGR-350 Transient Benchmark 
+for evaluating prismatic HTGR analysis codes. The benchmark is sponsored by the 
+OECD's Nuclear Energy Agency, and will eventually yield a set of peer-reviewed steady-
+state, transient, and lattice solutions that can be used by the Department of Energy, 
+Nuclear Regulatory Commission and vendors to assess their codes. The technical 
+specification is based on the General Atomics 350 MW Modular High Temperature Gas-
+Cooled Reactor (MHTGR) design 
+1,2. The HTGR Methods group at INL is responsible 
+for defining the benchmark specifications, lead the data collection and comparison 
+activities, and chair the annual technical workshops. Several code development and 
+verification activities from participants in Germany, Korea and the United States are 
+currently based on the MHTGR-350 benchmark, and progress on the INL contributions 
+have already been completed 
+3,4,5.  
+As part of the benchmark simulation activities, the Parallel and Highly Innovative 
+Simulation for INL Code System (PHISICS) 6 reactor physics package was coupled to 
+the INL-developed system thermal analyses code RELAP5-3D 7 to enable neutron 
+transport calculations for the core as well as more flexible cross section handling in 
+===PAGE 6===
+5 
+ 
+coupled core simulations. RELAP5-3D typically does not provide the spatial resolution 
+of higher fidelity thermal fluid codes but it does have a well-validated plant simulation 
+capability.  
+This paper summarizes the INL results obtained for Exercises 2 and 3 defined for 
+Phase I of the benchmark, with a specific focus on a comparison of the traditional 
+homogenized (ring) model approach with a much more detailed triangular geometry 
+model for the thermal-hydraulic solution with RELAP5-3D. These two models were 
+developed during the coupling of the PHISICS/RELAP5-3D system to investigate the 
+effect of spatial refinements in the temperature fields on the typical parameters of 
+interest (fuel temperatures, k
+eff), and to assess the suitability of utilizing a systems code 
+like RELAP5-3D to provide detailed temperature profiles.  
+ 
+II. OECD/NEA MHTGR-350 BENCHMARK OVERVIEW 
+ 
+The MHTGR-350 MW benchmark specification was developed in cooperation with 
+General Atomics to compare different codes and methods, since validation data from 
+current or past prismatic HTGR experimental facilities or reactors are severely limited. 
+The scope of the benchmark is to establish a well-defined problem based on a common 
+given data set, and to compare methods and tools in core simulation and thermal 
+hydraulic analysis through a set of multi-dimensional computational test problems. The 
+MHTGR-350 MW benchmark is based on the approach followed for the OECD/NEA 
+PBMR-400 MW benchmark 
+8. It consists of three Phase I steady-state exercises, four 
+Phase II transient exercises, and two Phase III depletion exercises. The focus of this 
+RELAP5-3D comparison paper is on the results obtained for the Exercises 2 and 3 of 
+===PAGE 7===
+6 
+ 
+Phase I, as summarized below. (The stand-alone neutronics results obtained for 
+Exercise 1 were included in a 2013 INL status report 4, and will not be discussed here).  
+• Exercise 1: Neutronics only steady-state solution for the 350 MW End of Equilibrium 
+Cycle (EOEC) MHTGR core, using the specified geometry, material descriptions, 
+and detailed cross-section libraries. 
+• Exercise 2: Thermal hydraulics only steady-state core solution. Four sub-cases are 
+defined, depending on the core bypass flow type and the use of fixed or variable 
+thermophysical material properties. Participants are expected to provide steady-
+state solutions for each of these sub-cases according to their codes' capabilities. A 
+defined core power distribution map must be used, since no neutronics are involved 
+in this exercise. 
+• Exercise 3: Coupled neutronics-thermal hydraulic core steady state. This exercise is 
+a combination of the first two exercises and the coupled steady-state solution must 
+be calculated using the provided temperature dependent cross-section library and 
+burnup distributions. 
+The axial and radial core layouts of the MHTGR-350 design are shown in Fig. 1 and 
+Fig. 2, respectively, and the major core characteristics are summarized in Table I. (In 
+Fig. 1, the Control Rods (CR), Core Barrel (CB) and Reactor Pressure Vessel (RPV) are 
+also indicated). A detailed description of the MHTGR-350 design can be found in the 
+benchmark specification document (currently still in draft format 
+2). The 1/3rd core 
+numbering utilized for the benchmark data reporting, and the discussion that follows in 
+this paper, is shown in Fig. 3 for the first (bottom) layer of the core and reflector regions. 
+ 
+ 
+ 
+===PAGE 8===
+7 
+ 
+ 
+III. CODE AND MODEL DESCRIPTION  
+This section provides an overview of the simulation codes utilized for this 
+benchmark, as well as a discussion of the models developed and major assumptions 
+that were made.  
+III.A. The Phisics Code Suite 
+The complex phenomena in Generation IV systems such as the MHTGR design 
+challenge legacy system codes like RELAP5-3D, which were developed for best 
+estimate transient simulation of light water reactors 7. RELAP5-3D is able to model 
+coupled behaviour of the plant system (heat exchangers, steam generators, pumps, 
+valves, etc.), thermal-hydraulics of the reactor core and the neutronics of the reactor. 
+The code was specifically designed for simulations of light water reactor transients such 
+as loss of coolant, anticipated transients without scram, and operational transients such 
+as loss of feed water, etc. The multidimensional neutron kinetics model in RELAP5-3D 
+is based on the NESTLE code 
+9, which solves the two or four group neutron diffusion 
+equations in either Cartesian or hexagonal geometry. A diffusion solution of the flux in 
+four energy groups may however not be sufficient to get an accurate representation of 
+the power distribution for the MHTGR 
+10. In addition, linear cross section feedbacks on 
+thermal hydraulic state parameters (such as fuel and moderator temperatures) as 
+supported by NESTLE/RELAP5-3D are not detailed enough to capture the complex 
+MTHGR cross section behaviour. 
+To be able to simulate MHTGR transients with the required neutronic fidelity, the 
+neutronic code package PHISICS has been coupled to RELAP5-3D. PHISICS (Parallel 
+and Highly Innovative Simulation for INL Code System) is a neutronics code system in 
+development 6 at INL. The different modules for PHISICS are a nodal and semi-
+===PAGE 9===
+8 
+ 
+structured spherical harmonics based transport core solver (INSTANT 11) for steady 
+state and time dependent problems, a depletion module (MRTAU 12) and a cross 
+section mixer-interpolator (MIXER 13) module. A detailed discussion of PHISICS’ theory 
+and structure are provided for interested readers14. This flexible package provides the 
+functionality to cope with the challenges of coupled neutronic/thermal hydraulic MHTGR 
+core simulations.  
+Each different module of PHISICS contains a kernel (module) that solves a basic 
+problem. A local driver is assigned to each kernel which is able to run it in standalone 
+mode. Communication between the kernels is managed by the use of global data types 
+that hold global information (cross section data, mesh, fluxes, etc.) that are needed by 
+more than one kernel to perform complex calculations involving different kernels. Global 
+drivers solving a complex problem calling different kernels can be developed easily with 
+this flexible software structure. The PHISICS code is still in development to extend its 
+capabilities (see 
+14 for more detail).  
+The transport core solver INSTANT (Intelligent Nodal and Semi-structured 
+Treatment for Advanced Neutron Transport) is the key kernel of the PHISICS 
+framework. INSTANT is parallelized and is designed to take full advantage of medium to 
+large clusters (10 to 1000 processors). It is based on the second order formulation of 
+the transport equation discretized in angle by spherical harmonics while in space it uses 
+orthonormal polynomials of an arbitrary order. In addition to steady-state solutions, 
+INSTANT is able to solve time dependent problems. For that, a scheme based on a 
+second order backward Euler scheme with explicit delayed neutron treatment has been 
+implemented as a new module for the PHISICS suite 
+5. 
+===PAGE 10===
+9 
+ 
+MRTAU (Multi-Reactor Transmutation Analysis Utility) is a generic depletion code 
+developed at INL 12. In addition to core depletion, the code can be utilised for stand-
+alone decay heat calculations. It tracks the time evolution of the isotopic concentration 
+of a given material accounting for nuclear reactions occurring in the presence of neutron 
+flux, and also due to natural decay (Bateman equation). The code uses a Taylor series 
+expansion based algorithm at arbitrary order and the Chebyshev Rational 
+Approximation Method (CRAM) for computation of the exponential matrix.  
+The MIXER module does all the cross section handling for the different kernels. 
+MIXER can handle macroscopic, microscopic and “mixed” cross sections. A 
+macroscopic cross section library contains macroscopic cross sections for each type of 
+material used in the calculation (fuel, reflector, etc.) tabulated for the state parameters 
+(temperature, burn- up, control rod position, etc.). MIXER interpolates these cross 
+sections at the requested state parameters, and no limits in tabulation dimensions or 
+neutron energy groups exist. A microscopic or “mixed” cross section library contains the 
+tabulated cross sections for each isotope considered in the calculation. MIXER reads a 
+description containing a list of isotopes and corresponding de nsities for each material , 
+and interpolate the microscopic cross sections at the requested state parameters . 
+Macroscopic cross sections for each material are generated with the corresponding 
+number densities.  
+With this capability, “mixed” macroscopic and microscopic cross sections are also 
+possible. For example, it is possible to provide macroscopic absorption cross sections 
+without xenon for a material and the microscopic xenon absorption cross section 
+together with a xenon density. MIXER will calculate the xenon absorption contribution 
+and add it to the macroscopic cross section. MIXER can read different cross section 
+library formats. Among them is an original simple XML based format, but also AMPX , 
+===PAGE 11===
+10 
+ 
+ISOTXS and ECCO library formats that allow cross section libraries to be prepared with 
+SCALE, ERANOS or MC2. More library types are planned to be supported in the future. 
+ 
+III.B. The coupling of PHISICS to RELAP5-3D 
+In order to increase the neutronic capabilities of RELAP5-3D, a direct coupling with 
+the PHISICS code has been performed, i.e., PHISICS is integrated with RELAP5-3D as 
+a set of subroutines14. This gives the user access to the full capability of PHISICS from 
+within RELAP5-3D. The PHISICS part of coupled calculations can be parallelized on 
+multiple processors, where the calculation is always driven by RELAP5-3D. The 
+RELAP5-3D input reader decides if parts of PHISICS are needed and calls the 
+PHISICS/RELAP5-3D driver accordingly. The driver collects the available input data 
+from RELAP5-3D (geometry, calculation options) and adds, if needed, data from special 
+PHISICS input files (cross sections, transport solver and depletion parameters, etc.) to 
+complete the required information for the specified calculation. Once all the inputs are 
+collected, the PHISICS/RELAP5-3D driver calls the required modules and feeds back 
+the results (power distribution) to RELAP5-3D for the next iteration. Fig. 4 shows the 
+general input data flows between the two packages. 
+RELAP5-3D is interfaced with the PHISICS code through a direct software “pipeline” 
+(interface) that manages the exchange of information between the two “physics” 
+elements (TH feedbacks from RELAP5-3D to PHISICS, fission and decay heat power 
+distributions from PHISICS to RELAP5-3D, etc.).  
+This “direct” coupling allows the user to run existing RELAP5-3D input decks with 
+INSTANT as the core solver (this option is made accessible from within RELAP5-3D 
+===PAGE 12===
+11 
+ 
+through a new keyword). The coupling is compatible with the existing RELAP5-3D cross 
+section and feedback options. Existing cross section inputs and mappings from kinetic 
+nodes to thermal hydraulic zones can be used with the INSTANT option. The RELAP5-
+3D control rod model can also be used. In addition, the coupling supports a new cross 
+section option which relaxes the RELAP5-3D limitation of four energy groups (only if 
+INSTANT is used). The number of neutron energy groups is only limited by the available 
+computer memory. Multi-group cross sections for this new option support an unlimited 
+number of tabulation dimensions (fuel temperature, moderator temperature, control rod 
+position, xenon density, etc.) and an unlimited number of tabulation points per 
+dimension. This new cross section option is compatible with existing mappings from 
+kinetic nodes to thermal hydraulic zones in RELAP5-3D.  
+The depletion code MRTAU is also coupled to RELAP5-3D as part of the PHISICS 
+suite. It can be used to perform core depletion calculations with coupled thermal 
+hydraulic feedbacks. In addition, MRTAU is able to burn the core to a desired depletion 
+level, or to perform cooling (decay), before a transient is initiated. MRTAU can also be 
+used for decay heat calculation and poison tracking during transients. The possible 
+calculation paths resulting by combining INSTANT, MRTAU and RELAP5-3D are 
+manifold 
+14. In this paper, a summary of the calculation path used for the OECD/NEA 
+MHTGR-350 MW benchmark are briefly presented. The calculation path can be split 
+into two main classes, namely the “depletion time evolution” and the “time dependent” 
+calculation path.  
+The “depletion time evolution” scheme is used to compute core depletion with an 
+updated temperature field in the core. Fig. 5a shows the calculation path for this 
+scheme. The first loop (on the left in the figure) is iterated between MIXER, INSTANT 
+and RELAP5-3D until temperature convergence is reached taking into account the 
+===PAGE 13===
+12 
+ 
+neutronic feedback. The calculation then goes into the depletion loop (shown on the 
+right in the figure). Here, the thermal hydraulic state parameters are kept constant, but 
+the isotopic densities from the depletion calculation are updated. The scheme continues 
+to deplete the core with user-defined time steps until an update of the temperature field 
+is requested by the user (in Fig. 5a, t=T
+n). This “depletion time evolution” scheme is 
+used in the MHTGR benchmark analysis to find the steady state temperature 
+distribution in the core with xenon at its equilibrium value (see Phase I Exercise 3, 
+Section V).  
+The “time dependent” calculation scheme with MRTAU is used to track isotopic 
+densities during a coupled thermal hydraulic transient (i.e. RELAP-3D in transient 
+mode). Fig. 5b shows the calculation scheme for the “time dependent” mode. In this 
+mode, MRTAU depletes the core for one time step, as specified by RELAP5-3D. The 
+updated sources and cross sections are then sent to INSTANT which computes the new 
+core power and flux distribution for the current time step. During the next time step 
+RELAP5-3D calculates the new temperature distribution. The MIXER module then 
+finally updates the cross sections for the new thermal hydraulic state variables and 
+sends it to MRTAU for the next depletion step. This scheme is not demonstrated in this 
+paper, but will be utilized for the calculation of time-dependent xenon build-up and 
+decay during the control rod movements defined for Phase II Exercise 4 
+2. 
+III.C. Ring and block Model Descriptions 
+Two different PHISICS/RELAP5-3D models have been set up for the benchmark to 
+investigate the improvements that can be obtained with a refined spatial representation. 
+One models the core as 9 homogenized rings whereas the higher fidelity model is 
+refined to one-sixth of a fuel block (hereafter referred to as the “ring” and “block” 
+===PAGE 14===
+13 
+ 
+models). The details and assumptions for both these models are briefly presented here, 
+in addition to the overviews presented previously 3,4,5. Since the two models only differ 
+in the way they model the core and reflector regions, the reactor vessel nodalization for 
+RELAP5-3D is the same for both models and is shown in Fig. 6. The time-dependent 
+junction #255 adjusts the inflow helium mass flow rate to obtain a target outlet helium 
+temperature of 687°C through a control variable that combines the outlet pressure (6.39 
+MPa), inlet helium temperature (259°C) and the total thermal power (350 MW) boundary 
+conditions. In addition to the core region, the model includes the lower plenum (#175), 
+coolant riser (#115), upper plenum (#125), outlet plenum (#170), vessel gap and the 
+vessel metal structures. The benchmark does not require the modelling of the 
+secondary system.  
+In both the ring and block models, PHISICS uses a hexagonal mesh for the 
+neutronics solution corresponding to a fuel or reflector block. One third of the core is 
+modelled to make use of the 120
+o azimuthal symmetry (see Fig. 1). The core is divided 
+into 14 axial levels, two each for the upper and lower reflector and 10 levels for the core 
+region. The 26 energy group cross-section library is read as separate data structures, 
+and updates are performed on these base cross-section sets during the steady state 
+convergence process in the MIXER module. The cross section updates are performed 
+for four state parameters: moderator and fuel temperature, xenon-135 concentration 
+and the hydrogen concentration (for the water ingress transient).  
+The four-dimensional cross-section tables are designed to cover the initial steady-
+state conditions and the expected ranges of the four selected instantaneous feedback 
+parameters in the transients to be simulated in the benchmark. The reference tabulated 
+cross-section set was generated from the DRAGON 4 lattice code using the end of 
+equilibrium core number densities with 26 energy groups 
+2. 
+===PAGE 15===
+14 
+ 
+III.C.1 Ring model 
+The ring model follows the common system-code homogenization approach of 
+modelling the inner reflector, fuelled core region, and outer reflector as rings in 
+cylindrical coordinates, with three additional rings representing the core barrel (CB), 
+reactor pressure vessel (RPV), and outer air boundary layer (Fig. 7). The coarse axial 
+mesh is discretized in 2 upper reflector, 10 core and 2 lower reflector elements, as 
+shown Fig. 2. The core consists of 9 parallel flow channels representing each a ring in 
+the core, i.e., there are three channels representing the inner reflector, three channels 
+representing the three fuel rings, two channels representing the replaceable outer 
+reflector and one channel representing the permanent outer reflector. Each channel is 
+coupled to its own heat structure representing the fuel or graphite blocks in the 
+corresponding core ring. The radii of the rings are calculated to represent the correct 
+graphite volumes in each of the structures, and it includes corrections for the 2 mm 
+gaps between the reflector blocks and the 3 mm gap between the outer reflector and 
+the metallic core barrel.  
+In addition, a total of seven core bypass flow channels represent the flow through 
+the gaps between the graphite blocks, according to the specifications of the benchmark. 
+A number of conduction and radiation sets are included in the model to account for 
+radial conduction and axial radiation between the graphite structures in the inner, outer, 
+top and bottom reflectors. Radial radiation heat transfer is also modelled between the 
+outer reflector surface and the core barrel, and from the outer surface of the reactor 
+vessel to the boundary air layer, as shown in Fig. 8. Adiabatic boundary conditions are 
+applied at the top and bottom model boundaries, and the outer radial air layer is defined 
+to be at a constant temperature of 30°C. 
+===PAGE 16===
+15 
+ 
+ 
+III.C.2 The unit cell 
+In the MHTGR core design, neutronic feedbacks on the fuel and moderator 
+(graphite) temperatures are quite different. Therefore, it is desirable to have an accurate 
+prediction of the fuel and moderator temperatures independently. To model the fuel 
+region of the core, a cylindrical “unit cell” has been defined, consisting of a fuel 
+compact, its surrounding matrix graphite and a helium coolant channel (Fig. 9). In this 
+approach, the fuel compact (TRISO fuel particles embedded in graphite) is 
+homogenization to a single region. The unit cell is constructed as follows:  
+• The radius of the coolant hole corresponds to the actual design radius. 
+• The distance between the coolant hole and the homogenized fuel region, i.e. the 
+thickness of the inner graphite region, corresponds to the actual design distance so 
+that the heat transfer distance is conserved. 
+• The homogenized fuel region conserves the actual design fuel volume, i.e. the 
+thickness of this region is determined by the fuel volume in the unit cell. 
+• The size of the outer graphite region (outer ring in Fig. 9) is such that the total 
+graphite mass in the unit cell is represented. 
+At this stage detailed results for a representative TRISO fuel particle within the fuel 
+compact is not available, but preliminary investigations have been performed using an 
+additional heat structure in RELAP5-3D to represent the layers within the TRISO 
+kernels. Despite the fact that the fuel compact is still homogenised, the use of a “unit 
+cell” model leads to better fuel and moderator temperatures prediction than a 
+homogenized core ring. In the ring model three unit cells are therefore used (one per 
+===PAGE 17===
+16 
+ 
+fuel ring) to distinguish between the average fuel and moderator temperature in the 
+inner, center and outer fuel rings. 
+III.C.3 The block model 
+In the block model, a single hexagonal block is explicitly represented by dividing it 
+into six triangular elements, as shown in Fig. 10. Each of these triangles is represented 
+by the unit cell heat structure in RELAP5-3D as described above. Each unit cell heat 
+structure is connected to two hydraulic channels; one in the center representing the 
+core coolant helium flow and one on the outer surface representing the gap flow 
+between two fuel blocks. Heat transfer between the triangular elements occurs in two 
+ways: inside a block via conduction, and between blocks via radiation across the 2 mm 
+gap between the block faces. These connections are defined as part of the conduction 
+and radiation enclosure sets in the RELAP5-3D model, in addition to the existing 
+enclosure sets already defined for the ring model (Fig. 8). This block model can 
+therefore provide a much more detailed temperature distribution compared to the ring 
+model.  
+In the case of the first fuel ring, for example, blocks 8-13 in Fig. 3 can now be 
+represented with 6*6=36 triangular elements, which provide 36 data points per axial 
+layer compared to only one value for the ring model. 
+In theory, one could imagine representing the whole core including the reflector 
+regions (91*14=1274 blocks) using the triangular block representation. Unfortunately, 
+RELAP5-3D has some restrictions that lead to a limit on the fidelity that can be 
+obtained: 
+===PAGE 18===
+17 
+ 
+• Neutronic feedback zones: A feedback zone defines how feedback parameters 
+(temperatures, densities, etc.) calculated by RELAP5-3D are averaged before 
+passed to the neutronic solver as well as how the power computed in a node by the 
+neutronic solver is distributed among the RELAP5-3D heat structures. The modelling 
+of Ex. 3 required the use of kinetic feedback zones to manage the exchange of 
+power (calculated by INSTANT) and temperature (RELAP5-3D) data. There is 
+however a limit on the number of these data types that the code can process. It was 
+initially envisaged to couple the triangular feedback elements on a one-to-one basis, 
+i.e., one triangular node in RELAP5-3D would provide temperature data to a 
+triangular node in INSTANT, which would then pass back the triangular power 
+distribution to RELAP5-3D for the next iteration. Since the modelling of the full 
+MHTGR-350 core graphite structures in a triangular geometry requires 7,644 kinetic 
+nodes, a full core triangular model was not an option due the limitations in the 
+number of kinetic zones available in RELAP5-3D. (A total of 7,644*2=15,288 nodes 
+are actually required if the both the fuel and moderator temperature are to be 
+resolved separately). On the neutronics side of the coupling, INSTANT therefore 
+uses a hexagonal mesh for the neutronics solution, i.e. corresponding to a single 
+fuel or reflector block. 
+ 
+• Heat conduction/radiation enclosures: A heat conduction/radiation enclosure in 
+RELAP5-3D contains all surfaces that conduct or radiate heat to each other. Due to 
+input limitations, an enclosure in RELAP5-3D can currently only hold 99 surfaces. To 
+put all surfaces in the core into one enclosure is therefore not possible. Furthermore, 
+there can be only 99 enclosures in total in the model and finally, a heat structure 
+===PAGE 19===
+18 
+ 
+surface can only be part of one conduction or one radiation enclosure, but not both. 
+This limitations lead to the following model choices: 
+o It is not possible to represent the whole core with one-sixth blocks. It was 
+therefore decided to focus the RELAP5-3D triangular sub-division on the 
+important regions of the active core region (Rings 4-6) and the two reflector 
+rings next to the core (Rings 3 and 7). The RELAP5-3D block model (Fig. 11) 
+therefore consists of “smeared-out” representation in Rings 1 and 2 (Blocks 1-
+3) and 8-10 (Blocks 44-91), and a detailed triangular resolution in Rings 3-7 
+(Blocks 8-43) (the block numbering is indicated in Fig. 3) . 
+o It’s not possible to connect one heat structure surface to a conduction and 
+radiation enclosure at the same time. Therefore, it has been decided to use 
+the left side (inner) of each unit cell to model the conduction inside a block 
+and the right side (outer) to model the radiation between blocks. This 
+approach leads to two important unit cell model assumptions. First, it 
+assumed that the outer side temperature of the unit cell represents the 
+temperature at the outer surface of a block. This temperature is used to 
+radiate the heat between blocks. Second, the inner surface temperature of 
+the unit cell has to be used to compute the conduction between two one-sixth 
+elements of a block. To minimize the impact of these (obviously approximate) 
+assumptions, the model view factors (radiation) and conduction lengths 
+(conduction) have been corrected accordingly. 
+ 
+ 
+ 
+ 
+===PAGE 20===
+19 
+ 
+III.C.4 Model Size and Computational Performance 
+As can be expected, the increase in model resolution and subsequent larger 
+temperature and power datasets resulted in significant penalties in terms of model size 
+and computational performance. A comparison of the two PHISICS/RELAP5-3D models 
+is presented in Table II. The RELAP5-3D run time of a typical converged steady-state 
+solution for the thermal fluids standalone Ex. 2 increased from 0.1 h (ring model) to 5 h 
+(block model). For Ex. 3, the coupled PHISICS/RELAP5-3D solution required 11 h to 
+converge for the ring model, and 20 h for the block model. The run time for Ex. 3 
+includes the use of 28 parallel processors, compared to a single processor for Ex. 2. 
+The main question is therefore if this investment in model development, simulation time 
+and post-processing lead to significant gains in the block model results, compared to 
+the much simpler and faster ring model.   
+ 
+IV. BENCHMARK RESULTS: PHASE I EXERCISE 2 
+RELAP5-3D in stand-alone mode has been used to solve the four sub-cases of 
+Exercise 2, which are defined as thermal fluids standalone calculations with fixed power 
+density profiles in the fuel region. The four sub-cases are defined in order of increasing 
+complexity (and summarized in Table III). Ex. 2a assumes that all coolant flow is 
+through the core region, and only fixed thermophysical properties are specified, as 
+shown in Table IV. For Ex. 2b, the bypass flow modeling in seven fixed bypass flow 
+channels, totalling up to 11% of the total inlet flow rate (Table V), are required. Instead 
+of the fixed thermophysical properties provided for Ex. 2a and Ex. 2b, the material 
+properties prescribed for Ex. 2c vary as complex functions of fluence and temperature 
+2. 
+The definition of Ex. 2d combines the variable material properties with the requirement 
+===PAGE 21===
+20 
+ 
+to model the bypass flow distribution explicitly through the 2-mm gaps between the 
+blocks.  
+The primary parameters of interest for Ex. 2 are the gas and solid temperatures and 
+global parameters such as the pressure drop over the core and the inflow mass flow 
+rate. The benchmark does however require participants to also report secondary 
+parameters such as the calculated thermal conductivities, mass flow rate or velocities in 
+bypass channels and heat transfer factors, since this data can be utilized to trace the 
+source of possible differences in the primary parameters. In this paper, only a subset of 
+the available data will be presented to illustrate the main characteristics for each of the 
+exercises. Since the variances between Ex. 2a and Ex.2b - Ex.2d is relatively small, 
+most of the data discussed in this section is for Ex. 2a.  
+IV.A Exercise 2a  
+The Ex. 2a fuel temperature distributions shown in Fig. 12 (ring model) and Fig. 13 
+(block model) for the bottom core axial layer illustrate the increased spatial resolution of 
+the block model over the ring model. A more detailed distribution of temperatures was 
+obtained on the triangular mesh compared to three values per axial layer for the ring 
+model. The ring model predicted significantly lower temperatures compared to the block 
+model, which show for example radial temperature variations up to 300°C between the 
+three fuel rings on this axial level (Fig. 13). This is because the block model is not a 
+spatial refinement of the ring model (in the CFD-sense), but an independent model 
+developed with its own assumptions and approximations. The treatment of radiation 
+enclosures, conduction between the triangular elements and conduction individual gas 
+flow connections to each face of the triangles in the block model are significantly 
+different from the much simpler representation in the ring model, where one unit cell 
+===PAGE 22===
+21 
+ 
+represents an entire axial layer of blocks. For example, since the power density is 
+specified per block, the spatial power variation between two blocks in the same ring can 
+be distinguished in the block model, leading to individual predictions of the temperatures 
+in these blocks. In contrast, the power density in the ring model are volume-averaged 
+over all 6 blocks in the inner ring (for example), which directly leads to an averaging 
+effect on the fuel temperatures as well. It can therefore not necessarily be deduced that 
+this model provides the most accurate temperature predictions without comparison to 
+experimental values.  
+The two examples presented here show how the local temperature hot spots (e.g. in 
+the inner fuel ring fresh fuel blocks) and variances between the blocks can be identified 
+using a higher resolution model. This capability is lacking in the ring model, and the 
+resultant under-prediction can be important in design and safety studies, where the 
+margins to fuel temperature limits need to be quantified. A more detailed spatial 
+quantification of the peak fuel temperatures during loss of cooling or control rod 
+withdrawal transients could assist in calculating the volume of fuel exposed to high 
+temperatures and power densities, which are typically used as boundary conditions by 
+fuel performance codes for fission product release calculations. This in turn might allow 
+a core designer or utility to license a design for higher power levels, if it can be shown 
+that the margins are sufficient. The additional effort required for the development of a 
+more detailed modelling approach can therefore be justified based on the intended use 
+and possible gains that can be derived from these models.  
+The graphite temperature distribution is shown for the whole core region in Fig. 14 
+(ring model) and Fig. 15 (block model). The relatively high inner reflector temperatures 
+can be seen in both figures, since Ex. 2a did not include any bypass flow modelling in 
+the reflectors. The block model (Fig. 15) show six equal values in the regions where a 
+===PAGE 23===
+22 
+ 
+ring representation is used, e.g. blocks 1 and 2, but the detailed information available 
+form this model is again apparent in the triangular regions of the core.  
+As an example of the data that can be obtained from the detailed block model, the 
+average fuel temperature axial profiles for the six triangular elements of block 9 are 
+presented in Fig. 16. The block 9 average value can then be calculated from this data, 
+and compared with the inner fuel ring temperature result obtained from the ring model, 
+as shown in Fig. 16. The lower temperatures of the ring model (up to 10% in certain 
+regions) are again apparent in this axial temperature profile, caused by the lack of 
+individual block power density resolution.   
+IV.B Exercises 2b-2d  
+The inclusion of the 11% bypass flow in the Ex. 2b RELAP5-3D model leads to 
+significant decreases in the inner and outer graphite reflector temperatures, as shown in 
+Fig. 17. The block model predicts up to 41% lower temperatures in the inner reflector 
+region. The effect on the fuel region is in the opposite direction (i.e., Ex. 2b exhibits 
+higher fuel temperatures), but this difference is comparatively small (less than 10%). 
+This is because a decrease from 100% to 89% of the nominal helium flow rate through 
+the core still represents a very effective convective heat removal mechanism. It should 
+be noted that Ex. 2b represents an unphysical MHTGR-350 scenario, since 
+approximately 6% of all energy is deposited outside the fuel region in the reflectors via 
+fast neutron and gamma interactions 
+15. This non-local heat deposition is not included in 
+the benchmark specification, and will lead to much higher reflector temperatures, which 
+will counter the effects of these reflector bypass flows to some degree. 
+ 
+ 
+===PAGE 24===
+23 
+ 
+The only difference between Ex. 2b and Ex. 2c is the addition of the variable 
+thermophysical properties. The RELAP5-3D MHTGR-350 benchmark model for Ex. 2c 
+uses dependent thermophysical properties for graphite to account for the fluence, as 
+prescribed in the benchmark specification. The proper modeling of the decrease in 
+thermal conductivity with an increase in fast flux exposure is especially important for fuel 
+and graphite temperatures during the loss of cooling transients in Phase II. Only minor 
+differences are observed between these two Phase I cases, since the convective heat 
+transport of the active helium cooling during normal operation dominates the effects of 
+changes in the material conductivity and specific heat. The difference between Ex. 2b 
+and Ex. 2c will become more significant during the loss of cooling transients that will be 
+performed for Phase II. The results are therefore not shown here. 
+ 
+Exercise 2d combines the effects of bypass flows and variable thermophysical 
+properties. The difference between Ex. 2c and Ex. 2d is the specification that the real 
+geometry of the MHTGR-350 must be used to determine the converged bypass flows in 
+the 2 mm gaps that exist between all blocks, as well as the 3.5 mm gap between the 
+outer reflector and the CB. This exercise is designed to capture the high resolution and 
+fidelity that Computational Fluid Dynamics (CFD) is capable of, but since the intended 
+design use of RELAP5-3D is typically thermal system analysis of a lower fidelity, the 
+current RELAP5-3D model can only approximately the real geometry of these gaps with 
+a network of 1D pipe elements. The RELAP5-3D block model predicts a total of 14.2% 
+bypass flow outside the core region, i.e. relatively close to the 11% value used in Ex. 2b 
+and Ex. 2c.  
+ 
+ 
+===PAGE 25===
+24 
+ 
+V. BENCHMARK RESULTS: PHASE I EXERCISE 3 
+Exercise 3 combines the solutions of the neutronics and thermal fluid domains, and 
+therefore requires the use of a coupled solution methodology. The Ex. 3a model is 
+created by combining the RELAP5-3D thermal fluid model developed for Ex. 2c (11% 
+bypass flow, variable thermophysical properties) with the PHISICS kinetics, while Ex. 2d 
+is used as the basis for Ex. 3b. In the PHISICS/RELAP5-3D solver scheme, the xenon 
+equilibrium is obtained by using MRTAU to “burn” the core in 4 time steps of 2.5 days 
+each, i.e. for a total of 10 days. This process involves four recalculations of the flux with 
+INSTANT after every 2.5 days, using the scheme illustrated in Fig. 5a. A comparison 
+between the eigenvalues and Control Rod (CR) worths obtained for Ex. 3a and Ex. 3b is 
+summarized in Table VI for the ring and block models. 
+ 
+For Ex. 3a, the difference between the ring and block models are relatively small 
+(less than 160 pcm), and the predicted CR worths are within 80 pcm for the two models. 
+Since the neutronics model is the same for the ring and block cases, these variances 
+are caused by the refined feedbacks provided by RELAP5-3D. The block model 
+eigenvalues are less than the ring model values for Ex. 3b, and the two CR worths are 
+almost identical. The only differences between the two cases (3a and 3b) are the 
+changes in the fuel (Doppler) and moderator temperatures due to the slight variation in 
+the bypass flow distribution, which act as the drivers for the small variances predicted 
+for the two exercises. 
+ 
+The power density distribution reaches a maximum axial value on level 8 (634 cm 
+from the bottom of the core). The power density distribution on level 8 is shown for Ex. 
+===PAGE 26===
+25 
+ 
+3a in Fig. 18, where a peak value of 11 W/cm3 is calculated in block 13. (The power and 
+flux data are calculated on the hexagonal mesh, as explained in section III.C).  
+A fast and a thermal flux data example is shown in Fig. 19 and Fig. 20 for two of the 
+26 groups. The Ex. 3a data shown here was taken at axial level 8 where the axial flux 
+profiles reach a maximum value. The fast flux peak in the fuel regions of the core is 
+clearly visible in Group 1 (Fig. 19), whereas the peak thermal flux occurs in Group 20 
+and in the inner reflector as the fast neutrons are thermalized (Fig. 20). 
+ 
+As a final example, the average fuel temperature relative difference (%) between Ex. 
+2d and Ex. 3b is shown for the bottom (Fig. 21) and top (Fig. 22) axial layers of the core. 
+In the hot bottom regions of the core the differences are less than -8% (i.e. the 
+temperatures are higher for Ex. 2d than Ex. 3b), but these variations increase as the 
+colder upper regions of the core are reached, where differences up to 23% are 
+calculated for block 29 (Fig. 22). 
+ 
+A significant difference therefore exists between the axial temperature profiles of Ex. 
+2c and Ex. 3b (shown in Fig. 23 for block 9, as an example). This is caused by the 
+feedback kinetics of the coupled case, as opposed to the constant power profile 
+specified in Ex. 2d. The cross -section feedbacks on the xenon concentration, control 
+rod position and the fuel and moderator temperatures all contribute to this change in the 
+axial temperature distribution. 
+ 
+ 
+ 
+ 
+===PAGE 27===
+26 
+ 
+VI. CONCLUSIONS 
+ 
+Selected results for Phase I Exercises 2 and 3 of the OECD/NEA MHTGR -350 
+benchmark were presented for two models: a conventional homogenized “ring” model 
+and a higher fidelity triangular -based “block” model. It was shown that the RELAP5 -3D 
+code can be applied to obtain detailed fuel and reflector temperature profiles in a 
+prismatic HTGR core. Although a significant penalty was paid in terms of the 
+computational resources required for the block model, the resultant gain in spatial 
+fidelity justifies the development of such detailed models. Local temperature hot spots 
+and variances between the blocks can be identified with the use of such a refined 
+model, which can be of significant importance in reactor safety studies, where the 
+margins to fuel temperature limits (for example) need to be quantified.  
+In the next phase of the benchmark, the two models will again be compared for two 
+loss-of-cooling transients, two water ingress events and a power load follow transient. It 
+is expected that the higher spatial fidelity of the block model will be especially apparent 
+during the reactivity insertion caused by the water ingress into the MHTGR core.  
+ 
+ACKNOWLEDGMENTS 
+ 
+This work was supported by the U.S. Department of Energy, Assistant Secretary for the 
+Office of Nuclear Energy, under DOE Idaho Operations Office Contract DE-AC07-
+05ID14517. 
+ 
+ 
+===PAGE 28===
+27 
+ 
+REFERENCES 
+1. J. ORTENSI, et al., “Prismatic Core Coupled Transient Benchmark”, Trans. of the 
+American Nuclear Society, 104, p. 854 (2011).  
+2. J. ORTENSI, et al., “Prismatic Coupled Neutronics/Thermal Fluids Transient 
+Benchmark of the MHTGR -350 Core Design: Benchmark Definition”, Draft version 
+07/16/2013, Organization for Economic Corporation and Development (2013). 
+3. G. STRYDOM, A. EPINEY, “Relap5- 3D results for Phase I (Exercise 2) of the 
+OECD/NEA MHTGR- 350 MW benchmark”, Proc. of conf. ICAPP 2012, Chicago, 
+USA (2012). 
+4. G. STRYDOM, et al., “INL Results for Phases I and III of the OECD/NEA MHTGR -
+350 Benchmark”, INL/EXT-13-30176, Idaho National Laboratory (2013). 
+5. A. EPINEY, et al., “New Multi-group Transport Neutronics (PHISICS) Capabilities for 
+RELAP5-3D and its Application to Phase I of the OECD/NEA MHTGR -350 MW 
+Benchmark”, Proc. of conf. HTR 2012, Tokyo, Japan (2012). 
+6. C. RABITI, et al., “PHISICS: A New Reactor Physics Analysis Toolkit ”, Transactions 
+of the American Nuclear Society, Vol. 104, Hollywood, USA (2011). 
+7. RELAP5-3D© Code Manual, Vol.1- 5, Rev. 3, INEEL -EXT-98-00834, Idaho National 
+Laboratory (2009). 
+8. “ PBMR coupled neutronics/thermal hydraulics transient benchmark: the PBMR -400 
+core design. Volume I: Benchmark Definition”. NEA/NSC/DOC(2013)10, 
+Organization for Economic Corporation and Development (2013). 
+9. P. J. TURINSKY et al., “NESTLE: A Few -Group Neutron Diffusion Equation Solver 
+Utilizing the Nodal Expansion Method for Eigenvalue, Adjoint, Fixed- Source Steady 
+===PAGE 29===
+28 
+ 
+State and Transient Problems ”, EGG- NRE-11406, Idaho National Engineering 
+Laboratory, (1994).  
+10. Y. WANG, et al., “Improved Neutronics Treatment of Burnable Poisons for the 
+Prismatic HTR”, Proc. of conf.  HTR 2012, Tokyo, Japan (2012). 
+11. Y. WANG, C. RABITI, G. PALMIOTTI, “Krylov Solvers Preconditioned with the Low -
+Order Red-Black Algorithm for the PN Hybrid FEM for the INSTANT Code,” Proc. of 
+conf.  M&C 2011, Rio de Janeiro, Brazil (2011). 
+12. A. ALFONSI, et al., “PHISICS Toolkit: Multi-R eactor Transmutation Analysis Utility –
+MRTAU”, Proc. of conf. PHYSOR 2012, Knoxville, Tennessee, USA (2012). 
+13. A. EPINEY, et al., “PHISICS multi- group transport neutronic capabilities for 
+RELAP5”, Proc. of conf. ICAPP 2012, Chicago, USA (2012). 
+14. C. RABITI, A. ALFONSI, A.S. EPINEY, “New Simulation Schemes and Capabilities 
+for the PHISICS/RELAP5-3D Coupled Suite”, in publication , Nuclear Science and 
+Technology (2015). 
+15. G. STRYDOM, “TINTE uncertainty analysis of the maximum fuel temperature during 
+a DLOFC event for the 400 MW Pebble Bed Modular Reactor”, Proc. of conf. ICAPP 
+2004, Pittsburgh, USA (2004). 
+ 
+  
+===PAGE 30===
+29 
+ 
+
+)LJ0+7*5&RUH$[LDO/D\RXW
+ 
+ 
+RPV
+Helium Gap 
+Upper Plenum 
+Coolant Channel 
+Metallic Plenum 
+Element          
+(Alloy 800H) 
+Core 
+Restraint 
+Element 
+(Alloy 800H) 
+Upper 
+Reflector 
+Block 
+Fuel Block 
+Fuel Block with 
+RSC Hole 
+Replaceable 
+Reflector Block 
+Replaceable 
+Reflector 
+Block with 
+CR Hole 
+Core Barrel 
+Metallic Core 
+Support 
+Structure 
+(MCSS)   
+(Alloy 800H) 
+Fluid Outlet 
+Outlet 
+Plenum 
+Ceramic Tile 
+(Ceraform 1000) 
+Upper Plenum 
+Thermal Protection 
+Structure (UPTPS) 
+(Alloy 800H)  
+Neutronic 
+Boundary 
+Bottom Reflector 
+Block 
+(H-451 Grph) 
+Bottom Transition 
+Reflector Block 
+(H-451  Grph) 
+Flow Distribution  
+Block 
+(2020 Grph) 
+Post Block (2020 
+Grph) 
+Insulation (Kaowool) 
+Repl. Central 
+Reflector 
+Support Block 
+(2020 Grph) 
+Fluid Inlet 
+===PAGE 31===
+30 
+ 
+ 
+Fig. 2. MHTGR-350 Core Radial Layout. 
+  
+ 
+Permanent 
+Reflector (2020 
+Graphite) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+  
+   
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Replaceable 
+Reflector Block 
+(H-451  Graphite) 
+ 
+ 
+Replaceable Reflector 
+Block with CR Hole     
+(H-451  Graphite) 
+ 
+Fuel Block with 
+RSC Hole (H-451  
+Graphite) 
+Fuel Block (H-451  
+Graphite)  
+Core Barrel 
+(Alloy 800H) Coolant Channel RPV (SA-533B) 
+Neutronic 
+Boundary 
+Outside Air 
+120o Symmetry Line 
+RPV
+Neutronic
+boundary
+Fuel block 
+(H-451 graphite)
+Fuel block with RSC hole 
+(H-451 graphite)
+120° Symmetry line
+Outside air
+Replaceable reflector
+with CR hole
+(H-451 graphite)
+Replaceable reflector
+(H-451 graphite)
+Permanent reflector
+(2020 graphite)
+Core barrel
+(Alloy 800H)
+Coolant  channel
+===PAGE 32===
+31 
+ 
+ 
+Fig. 3. Core Numbering Layout (axial layer 1: bottom of core). 
+ 
+ 
+ 
+Inner reflector 
+(rings 1-3) 
+ Core region 
+(rings 4-6) 
+Non-replaceable 
+reflector (rings 9, 10) 
+Outer reflector 
+(rings 7, 8) 
+===PAGE 33===
+32 
+ 
+
+)LJ3+,6,&65(/$3'&RXSOLQJ6WUXFWXUH
+
+===PAGE 34===
+33 
+ 
+
+)LJD'HSOHWLRQ7LPH(YROXWLRQ6FKHPH
+
+
+===PAGE 35===
+34 
+ 
+ 
+Fig. 5b. Time-Dependent Scheme. 
+  
+
+===PAGE 36===
+35 
+ 
+ 
+Fig. 6. RELAP5-3D Reactor Vessel Model Nodalization. 
+  
+
+===PAGE 37===
+36 
+ 
+
+)LJ5LQJ0RGHO5DGLDO5HSUHVHQWDWLRQ
+
+===PAGE 38===
+37 
+ 
+
+)LJ&RQGXFWLRQJUHHQDUURZVDQG5DGLDWLRQUHGDUURZV(QFORVXUHVLQWKH
+5(/$3'0RGHO
+
+===PAGE 39===
+38 
+ 
+ 
+ 
+Fig. 9. Unit-cell Configuration. 
+  
+
+===PAGE 40===
+39 
+ 
+ 
+    
+Fig. 10. Block Model Conduction and Radiation Connections. 
+  
+
+===PAGE 41===
+40 
+ 
+
+)LJ5LQJDQG7ULDQJXODU*HRPHWU\8WLOL]HGLQWKH5(/$3'%ORFN0RGHO
+
+===PAGE 42===
+41 
+ 
+)LJ([D±$YHUDJH)XHO7HPSHUDWXUHq&'LVWULEXWLRQRQ$[LDO/HYHO%RWWRP
+&RUHIRUWKH5LQJ0RGHO
+
+
+===PAGE 43===
+42 
+ 
+)LJ([D±$YHUDJH)XHO7HPSHUDWXUHq&'LVWULEXWLRQRQ$[LDO/HYHOIRUWKH
+%ORFN0RGHO
+
+
+
+===PAGE 44===
+43 
+ 
+
+)LJ([D±$YHUDJH*UDSKLWH7HPSHUDWXUHq&'LVWULEXWLRQIRUDOO*UDSKLWH
+6WUXFWXUHVLQWKH5LQJ0RGHORQ$[LDO/HYHO
+
+
+===PAGE 45===
+44 
+ 
+
+)LJ([D±$YHUDJH*UDSKLWH7HPSHUDWXUHq&'LVWULEXWLRQIRUDOO*UDSKLWH
+6WUXFWXUHVLQWKH%ORFN0RGHORQ$[LDO/HYHO
+
+
+===PAGE 46===
+45 
+ 
+ 
+ 
+Fig.16. Ex. 2a – Block 9 Triangular Element Average Fuel Temperatures (°C). 
+
+===PAGE 47===
+46 
+ 
+
+)LJ$YHUDJH*UDSKLWH7HPSHUDWXUH'LIIHUHQFHEHWZHHQ([D$QG([EIRUDOO
+*UDSKLWH6WUXFWXUHVLQWKH%ORFN0RGHORQ$[LDO/HYHO
+
+
+===PAGE 48===
+47 
+ 
+)LJ([D3RZHU'HQVLW\:&P'LVWULEXWLRQRQ$[LDO/HYHOIRUWKH%ORFN
+0RGHO
+
+
+===PAGE 49===
+48 
+ 
+
+)LJ([D±*URXS)OX['LVWULEXWLRQRQ$[LDO/HYHOIRUWKH%ORFN0RGHO)DVW
+3HDN9DOXH
+
+===PAGE 50===
+49 
+ 
+
+)LJ([D±*URXS)OX['LVWULEXWLRQRQ$[LDO/HYHOIRUWKH%ORFN0RGHO
+7KHUPDO3HDN9DOXH
+
+
+===PAGE 51===
+50 
+ 
+
+)LJ$YHUDJH)XHO7HPSHUDWXUH'LIIHUHQFHEHWZHHQ([GDQG([ERQ$[LDO
+/HYHO)LUVW%RWWRP&RUH/HYHOIRUWKH%ORFN0RGHO
+
+===PAGE 52===
+51 
+ 
+)LJ$YHUDJH)XHO7HPSHUDWXUH'LIIHUHQFHEHWZHHQ([GDQG([ERQ$[LDO
+/HYHO7RSRI&RUHIRUWKH%ORFN0RGHO
+
+===PAGE 53===
+52 
+ 
+ 
+Fig. 23. Comparison of Block 9 Axial Average Fuel Temperature Profiles for Ex. 2d and 
+Ex. 3b. 
+ 
+  
+
+===PAGE 54===
+53 
+ 
+Table I. MHTGR-350 Main Characteristics. 
+Description Value 
+Power 350 MW(thermal) 
+Core/fuel design Graphite moderated, 660 prismatic hex-blocks 
+with 15.5 wt% enriched UCO TRISO fuel 
+compacts. 
+Coolant 
+Core inlet/outlet gas 
+temperature 
+Helium @ 6.39 MPa 
+259oC / 687oC 
+ 
+  
+===PAGE 55===
+54 
+ 
+TABLE II. Comparison of Ring and Block Model Metrics. 
+ 
+Description Ring model Block model 
+Hydrodynamic components ~20 ~250 
+Heat structures ~20 ~1,100 
+Materials 9  ~100  
+Kinetic feedback zones 170 ~4,700 
+Radiation/conduction 
+enclosures  
+17 enclosures with 
+~350 surfaces 
+88 enclosures with 
+~7,000 surfaces 
+Decay heat treatment 1 table (global core 
+power ) 
+220 tables (block 
+power) 
+Input file size (number of 
+lines) 
+~30,000 ~95,000 
+Real time required for 
+converged steady state 
+(hours) 
+Ex. 2: 0.1  
+Ex. 3: 11  
+Ex. 2: 5  
+Ex. 3: 20 
+ 
+  
+===PAGE 56===
+55 
+ 
+TABLE III. Ex. 2a-2d Definitions 
+Exercise  Bypass flow  Thermophysical properties 
+2a None Fixed 
+2b Fixed at 11% of total, distributed to 7 
+channels 
+Fixed 
+2c Fixed at 11% of total, distributed to 7 
+channels 
+Variable 
+2d Explicit, based on 2 mm gaps between 
+blocks 
+Variable 
+ 
+  
+===PAGE 57===
+56 
+ 
+Table VI: Material properties for Ex. 2a and Ex. 2b 
+Material Conductivity 
+(W/cm.K) 
+Emissivity 
+Fuel compact 20.0 0.85 
+Fuel block 37.0 0.85 
+Grade H-451 graphite 66.0 0.85 
+Grade 2020 graphite 35.0 0.85 
+Core barrel 
+Core restraint element 
+Upper plenum thermal protection 
+system 
+17.8 0.85 
+Ceramic tile 0.91 0.85 
+Thermal insulation 0.175 0.85 
+RPV 40.0 0.85 
+Coolant 0.41 - 
+Air 0.068 - 
+Heat sink - 0.8 
+ 
+ 
+===PAGE 58===
+57 
+ 
+Table V: Bypass Flow Distribution for Ex. 2b and Ex. 2c 
+ Component % 
+1 In-core 1.50 
+2 Inner Reflector 0.50 
+3 Inner Control Rod Cooling  1.20 
+4 Outer Control Rod Cooling  1.80 
+5 Outer Reflector (First Ring) 1.38 
+6 Outer Reflector (Second Ring) 1.62 
+7 Permanent Side Reflector 3.00 
+ Total 11.00 
+ 
+  
+===PAGE 59===
+58 
+ 
+TABLE VI. Ex. 3a and Ex. 3b Comparison of PHISICS/RELAP5-3D keff and CR 
+Worths for the Ring and Block models.  
+PHISICS-
+RELAP5-3D 
+model 
+CR nominal CR all out CR all in 
+CR worth 
+delta k/k 
+(pcm) 
+3a     
+ring 1.03447 1.03593 1.02673 888 
+block 1.03394 1.03511 1.02513 965 
+delta k (pcm) 53 81 160   
+3b     
+ring 1.03336 1.03450 1.02493 926 
+block 1.03384 1.03503 1.02549 922 
+delta k (pcm) -48 -52 -56   
+ 
+ 
+ 
+ 

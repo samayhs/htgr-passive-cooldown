@@ -1,0 +1,2691 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system/solid";
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Six fuel compacts -> cellSet 'fuel' -> cellZone 'fuel' (heat-source zone).
+actions
+(
+    {
+        name    fuel;
+        type    cellSet;
+        action  new;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.188000 0.000000 0);
+            p2      (-0.188000 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.178600 0.016281 0);
+            p2      (-0.178600 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.159800 0.048844 0);
+            p2      (-0.159800 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.150400 0.065125 0);
+            p2      (-0.150400 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 0.097688 0);
+            p2      (-0.131600 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 0.113969 0);
+            p2      (-0.122200 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 0.146531 0);
+            p2      (-0.103400 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 0.162813 0);
+            p2      (-0.094000 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.178600 -0.016281 0);
+            p2      (-0.178600 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.159800 0.016281 0);
+            p2      (-0.159800 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.150400 0.032563 0);
+            p2      (-0.150400 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 0.065125 0);
+            p2      (-0.131600 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 0.081406 0);
+            p2      (-0.122200 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 0.113969 0);
+            p2      (-0.103400 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 0.130250 0);
+            p2      (-0.094000 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 0.162813 0);
+            p2      (-0.075200 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.159800 -0.016281 0);
+            p2      (-0.159800 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.150400 0.000000 0);
+            p2      (-0.150400 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 0.032563 0);
+            p2      (-0.131600 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 0.048844 0);
+            p2      (-0.122200 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 0.081406 0);
+            p2      (-0.103400 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 0.097688 0);
+            p2      (-0.094000 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 0.130250 0);
+            p2      (-0.075200 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 0.146531 0);
+            p2      (-0.065800 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.159800 -0.048844 0);
+            p2      (-0.159800 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.150400 -0.032563 0);
+            p2      (-0.150400 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 0.000000 0);
+            p2      (-0.131600 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 0.016281 0);
+            p2      (-0.122200 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 0.048844 0);
+            p2      (-0.103400 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 0.065125 0);
+            p2      (-0.094000 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 0.097688 0);
+            p2      (-0.075200 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 0.113969 0);
+            p2      (-0.065800 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 0.146531 0);
+            p2      (-0.047000 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 0.162813 0);
+            p2      (-0.037600 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.150400 -0.065125 0);
+            p2      (-0.150400 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 -0.032563 0);
+            p2      (-0.131600 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 -0.016281 0);
+            p2      (-0.122200 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 0.016281 0);
+            p2      (-0.103400 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 0.032563 0);
+            p2      (-0.094000 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 0.065125 0);
+            p2      (-0.075200 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 0.081406 0);
+            p2      (-0.065800 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 0.113969 0);
+            p2      (-0.047000 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 0.130250 0);
+            p2      (-0.037600 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 0.162813 0);
+            p2      (-0.018800 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 -0.065125 0);
+            p2      (-0.131600 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 -0.048844 0);
+            p2      (-0.122200 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 -0.016281 0);
+            p2      (-0.103400 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 0.000000 0);
+            p2      (-0.094000 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 0.032563 0);
+            p2      (-0.075200 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 0.048844 0);
+            p2      (-0.065800 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 0.081406 0);
+            p2      (-0.047000 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 0.097688 0);
+            p2      (-0.037600 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 0.130250 0);
+            p2      (-0.018800 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 0.146531 0);
+            p2      (-0.009400 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.131600 -0.097688 0);
+            p2      (-0.131600 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 -0.081406 0);
+            p2      (-0.122200 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 -0.048844 0);
+            p2      (-0.103400 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 -0.032563 0);
+            p2      (-0.094000 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 0.000000 0);
+            p2      (-0.075200 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 0.016281 0);
+            p2      (-0.065800 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 0.048844 0);
+            p2      (-0.047000 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 0.065125 0);
+            p2      (-0.037600 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 0.097688 0);
+            p2      (-0.018800 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 0.113969 0);
+            p2      (-0.009400 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 0.146531 0);
+            p2      (0.009400 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 0.162813 0);
+            p2      (0.018800 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.122200 -0.113969 0);
+            p2      (-0.122200 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 -0.081406 0);
+            p2      (-0.103400 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 -0.065125 0);
+            p2      (-0.094000 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 -0.032563 0);
+            p2      (-0.075200 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 -0.016281 0);
+            p2      (-0.065800 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 0.016281 0);
+            p2      (-0.047000 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 0.032563 0);
+            p2      (-0.037600 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 0.065125 0);
+            p2      (-0.018800 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 0.081406 0);
+            p2      (-0.009400 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 0.113969 0);
+            p2      (0.009400 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 0.130250 0);
+            p2      (0.018800 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 0.162813 0);
+            p2      (0.037600 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 -0.113969 0);
+            p2      (-0.103400 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 -0.097688 0);
+            p2      (-0.094000 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 -0.065125 0);
+            p2      (-0.075200 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 -0.048844 0);
+            p2      (-0.065800 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 -0.016281 0);
+            p2      (-0.047000 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 0.000000 0);
+            p2      (-0.037600 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 0.032563 0);
+            p2      (-0.018800 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 0.048844 0);
+            p2      (-0.009400 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 0.081406 0);
+            p2      (0.009400 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 0.097688 0);
+            p2      (0.018800 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 0.130250 0);
+            p2      (0.037600 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 0.146531 0);
+            p2      (0.047000 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.103400 -0.146531 0);
+            p2      (-0.103400 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 -0.130250 0);
+            p2      (-0.094000 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 -0.097688 0);
+            p2      (-0.075200 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 -0.081406 0);
+            p2      (-0.065800 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 -0.048844 0);
+            p2      (-0.047000 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 -0.032563 0);
+            p2      (-0.037600 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 0.000000 0);
+            p2      (-0.018800 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 0.016281 0);
+            p2      (-0.009400 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 0.048844 0);
+            p2      (0.009400 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 0.065125 0);
+            p2      (0.018800 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 0.097688 0);
+            p2      (0.037600 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 0.113969 0);
+            p2      (0.047000 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 0.146531 0);
+            p2      (0.065800 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 0.162813 0);
+            p2      (0.075200 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.094000 -0.162813 0);
+            p2      (-0.094000 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 -0.130250 0);
+            p2      (-0.075200 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 -0.113969 0);
+            p2      (-0.065800 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 -0.081406 0);
+            p2      (-0.047000 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 -0.065125 0);
+            p2      (-0.037600 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 -0.032563 0);
+            p2      (-0.018800 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 -0.016281 0);
+            p2      (-0.009400 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 0.016281 0);
+            p2      (0.009400 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 0.032563 0);
+            p2      (0.018800 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 0.065125 0);
+            p2      (0.037600 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 0.081406 0);
+            p2      (0.047000 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 0.113969 0);
+            p2      (0.065800 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 0.130250 0);
+            p2      (0.075200 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 0.162813 0);
+            p2      (0.094000 0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.075200 -0.162813 0);
+            p2      (-0.075200 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.065800 -0.146531 0);
+            p2      (-0.065800 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 -0.113969 0);
+            p2      (-0.047000 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 -0.097688 0);
+            p2      (-0.037600 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 -0.065125 0);
+            p2      (-0.018800 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 -0.048844 0);
+            p2      (-0.009400 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 -0.016281 0);
+            p2      (0.009400 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 0.000000 0);
+            p2      (0.018800 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 0.032563 0);
+            p2      (0.037600 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 0.048844 0);
+            p2      (0.047000 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 0.081406 0);
+            p2      (0.065800 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 0.097688 0);
+            p2      (0.075200 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 0.130250 0);
+            p2      (0.094000 0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 0.146531 0);
+            p2      (0.103400 0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.047000 -0.146531 0);
+            p2      (-0.047000 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 -0.130250 0);
+            p2      (-0.037600 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 -0.097688 0);
+            p2      (-0.018800 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 -0.081406 0);
+            p2      (-0.009400 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 -0.048844 0);
+            p2      (0.009400 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 -0.032563 0);
+            p2      (0.018800 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 0.000000 0);
+            p2      (0.037600 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 0.016281 0);
+            p2      (0.047000 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 0.048844 0);
+            p2      (0.065800 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 0.065125 0);
+            p2      (0.075200 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 0.097688 0);
+            p2      (0.094000 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 0.113969 0);
+            p2      (0.103400 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.037600 -0.162813 0);
+            p2      (-0.037600 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 -0.130250 0);
+            p2      (-0.018800 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 -0.113969 0);
+            p2      (-0.009400 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 -0.081406 0);
+            p2      (0.009400 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 -0.065125 0);
+            p2      (0.018800 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 -0.032563 0);
+            p2      (0.037600 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 -0.016281 0);
+            p2      (0.047000 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 0.016281 0);
+            p2      (0.065800 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 0.032563 0);
+            p2      (0.075200 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 0.065125 0);
+            p2      (0.094000 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 0.081406 0);
+            p2      (0.103400 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 0.113969 0);
+            p2      (0.122200 0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.018800 -0.162813 0);
+            p2      (-0.018800 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (-0.009400 -0.146531 0);
+            p2      (-0.009400 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 -0.113969 0);
+            p2      (0.009400 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 -0.097688 0);
+            p2      (0.018800 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 -0.065125 0);
+            p2      (0.037600 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 -0.048844 0);
+            p2      (0.047000 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 -0.016281 0);
+            p2      (0.065800 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 0.000000 0);
+            p2      (0.075200 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 0.032563 0);
+            p2      (0.094000 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 0.048844 0);
+            p2      (0.103400 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 0.081406 0);
+            p2      (0.122200 0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 0.097688 0);
+            p2      (0.131600 0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.009400 -0.146531 0);
+            p2      (0.009400 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 -0.130250 0);
+            p2      (0.018800 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 -0.097688 0);
+            p2      (0.037600 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 -0.081406 0);
+            p2      (0.047000 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 -0.048844 0);
+            p2      (0.065800 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 -0.032563 0);
+            p2      (0.075200 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 0.000000 0);
+            p2      (0.094000 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 0.016281 0);
+            p2      (0.103400 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 0.048844 0);
+            p2      (0.122200 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 0.065125 0);
+            p2      (0.131600 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.018800 -0.162813 0);
+            p2      (0.018800 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 -0.130250 0);
+            p2      (0.037600 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 -0.113969 0);
+            p2      (0.047000 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 -0.081406 0);
+            p2      (0.065800 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 -0.065125 0);
+            p2      (0.075200 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 -0.032563 0);
+            p2      (0.094000 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 -0.016281 0);
+            p2      (0.103400 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 0.016281 0);
+            p2      (0.122200 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 0.032563 0);
+            p2      (0.131600 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.150400 0.065125 0);
+            p2      (0.150400 0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.037600 -0.162813 0);
+            p2      (0.037600 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.047000 -0.146531 0);
+            p2      (0.047000 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 -0.113969 0);
+            p2      (0.065800 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 -0.097688 0);
+            p2      (0.075200 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 -0.065125 0);
+            p2      (0.094000 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 -0.048844 0);
+            p2      (0.103400 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 -0.016281 0);
+            p2      (0.122200 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 0.000000 0);
+            p2      (0.131600 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.150400 0.032563 0);
+            p2      (0.150400 0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.159800 0.048844 0);
+            p2      (0.159800 0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.065800 -0.146531 0);
+            p2      (0.065800 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 -0.130250 0);
+            p2      (0.075200 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 -0.097688 0);
+            p2      (0.094000 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 -0.081406 0);
+            p2      (0.103400 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 -0.048844 0);
+            p2      (0.122200 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 -0.032563 0);
+            p2      (0.131600 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.150400 0.000000 0);
+            p2      (0.150400 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.159800 0.016281 0);
+            p2      (0.159800 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.075200 -0.162813 0);
+            p2      (0.075200 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 -0.130250 0);
+            p2      (0.094000 -0.130250 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 -0.113969 0);
+            p2      (0.103400 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 -0.081406 0);
+            p2      (0.122200 -0.081406 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 -0.065125 0);
+            p2      (0.131600 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.150400 -0.032563 0);
+            p2      (0.150400 -0.032563 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.159800 -0.016281 0);
+            p2      (0.159800 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.178600 0.016281 0);
+            p2      (0.178600 0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.094000 -0.162813 0);
+            p2      (0.094000 -0.162813 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.103400 -0.146531 0);
+            p2      (0.103400 -0.146531 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.122200 -0.113969 0);
+            p2      (0.122200 -0.113969 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.131600 -0.097688 0);
+            p2      (0.131600 -0.097688 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.150400 -0.065125 0);
+            p2      (0.150400 -0.065125 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.159800 -0.048844 0);
+            p2      (0.159800 -0.048844 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.178600 -0.016281 0);
+            p2      (0.178600 -0.016281 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellSet;
+        action  add;
+        source  cylinderToCell;
+        sourceInfo
+        {
+            p1      (0.188000 0.000000 0);
+            p2      (0.188000 0.000000 0.800000);
+            radius  0.006200;
+        }
+    }
+    {
+        name    fuel;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        {
+            set fuel;
+        }
+    }
+);
+
+// ************************************************************************* //

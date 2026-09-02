@@ -1,0 +1,25 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/solid";
+    object      heatSource;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// Volumetric fission heat source for the TEMPERATURE-based solver
+// (chtMultiRegionTFoam). Applied as an explicit W/m^3 source on the fuel
+// cellZone (created by topoSet, see system/solid/topoSetDict). The stock
+// enthalpy solver ignores this file and uses constant/solid/fvOptions instead;
+// keep the two q''' values in sync if you change the power density.
+//
+// Deposited on the fuel zone only (fuel volume fraction 0.2389), so the value is
+// block-average / 0.2389 to recover the benchmark block-average power density:
+//   average column : 5.93 MW/m3 block-avg  -> 24.83 MW/m3 fuel-local  (Phase-0 of record)
+//   peak column    : 11.0 MW/m3 block-avg (block 13/level 8, 1.85x) -> 46.05 MW/m3 fuel-local
+
+qVol    24.83e6;    // fuel-local q''' [W/m^3]  (5.93 MW/m3 block-avg, average column)
+zone    fuel;       // target cellZone
+
+// ************************************************************************* //

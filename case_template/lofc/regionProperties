@@ -1,0 +1,26 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      regionProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// LOFC variant: SOLID-ONLY conduction cooldown. Forced cooling is lost and the primary
+// is depressurised/stagnant (benchmark DCC family), so the in-channel helium is thermally
+// inert -- it is dropped entirely and the channels are treated as adiabatic. The block
+// sheds decay heat purely by conduction to the outer surface + radiation to the RCCS.
+// This is solid-only, so there is no p_rgh solve (and none of the closed-channel pressure
+// singularity of an active-fluid model: the 109 channels are disconnected enclosures).
+// Adiabatic channels trap heat -> conservative (over-predict peak). The empty fluid list
+// is required: chtMultiRegionTFoam looks up regions["fluid"].
+
+regions
+(
+    fluid       ()
+    solid       (solid)
+);
+
+// ************************************************************************* //

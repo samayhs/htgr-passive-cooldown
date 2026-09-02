@@ -1,0 +1,64 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/solid";
+    object      thermophysicalProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Grade H-451 graphite, MHTGR-350 benchmark values (NEA/NSC/R(2017)4). The fuel
+// compacts live in this same solid region (as a heat-source cellZone) and share these
+// curves; rho*Cp of a graphite-matrix compact is close to graphite, so this is a
+// reasonable approximation for thermal inertia. A distinct, lower k for the compacts
+// would need the 8-region split (~2 C effect).
+//
+// rho      : 1850 kg/m3  (Table AIV.3; PCEA AG density used for H-451).
+// emissivity 0.85 (Table AIV.3) -- applied at the accident outer radiative BC, not here.
+// kappa(T) : H-451 UN-IRRADIATED fit (Table AIV.2, only text-recoverable row):
+//            k = 3.28248e-5*T^2 - 0.124890*T + 169.2145  [W/m-K], valid 300-1900 K.
+//            The irradiated (fluence-dependent) rows are a table image in the PDF and
+//            the fluence file (OECD-MHTGR350-fluence.inp) is not in the repo; irradiation
+//            lowers k, so this un-irradiated curve biases the peak LOW (non-conservative).
+// Cp(T)    : deg-5 positive-power polynomial refit of the benchmark Cp(T) (Table AIV.3,
+//            [0.54212 - 2.42667e-6 T - 90.2725/T - 43449.3/T^2 + 1.59309e7/T^3
+//             - 1.43688e9/T^4]*4184); refit because OF hPolynomial takes only positive
+//            powers. Max error 0.28% over 350-1900 K.
+thermoType
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       polynomial;      // kappa(T)
+    thermo          hPolynomial;     // Cp(T)
+    equationOfState rhoConst;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+mixture
+{
+    specie
+    {
+        molWeight       12.011;      // carbon (nominal, solid)
+    }
+    equationOfState
+    {
+        rho             1850;        // kg/m^3  H-451 (Table AIV.3)
+    }
+    transport
+    {
+        // H-451 un-irradiated: k = 169.2145 - 0.124890 T + 3.28248e-5 T^2  [W/m-K]
+        kappaCoeffs<8>  (169.2145 -0.124890 3.28248e-5 0 0 0 0 0);
+    }
+    thermodynamics
+    {
+        Hf              0;
+        Sf              0;
+        // deg-5 refit of benchmark H-451 Cp(T) [J/kg-K] (Table AIV.3), positive powers
+        CpCoeffs<8>     (-824.5113 7.155443 -8.446299e-3 5.463413e-6 -1.841460e-9 2.526187e-13 0 0);
+    }
+}
+
+// ************************************************************************* //

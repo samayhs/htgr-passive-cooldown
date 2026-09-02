@@ -1,0 +1,19 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system/fluid";
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// Domain decomposition for the fluid region (disconnected coolant channels).
+// scotch does graph-based partitioning with load balancing — the right choice for
+// this disconnected, non-box arrangement (a geometric method would balance poorly).
+// 16 subdomains -> ~22k fluid cells each; matches the 16 physical cores.
+
+numberOfSubdomains  16;
+method              scotch;
+
+// ************************************************************************* //

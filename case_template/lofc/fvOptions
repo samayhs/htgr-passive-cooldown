@@ -1,0 +1,30 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/solid";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// LOFC variant: constant stand-in for the STOCK enthalpy solver only. The T-solver
+// chtMultiRegionTFoam reads the (now time-dependent) decay source from
+// constant/solid/heatSource (qVol Function1 table), NOT from this file, so the value
+// here is unused by the T-solver and cannot express q'''(t). Left at the t=0 decay
+// density (1.498 MW/m^3, average column) for reference / a stock-solver fallback.
+fuelHeatSource
+{
+    type            scalarSemiImplicitSource;
+    timeStart       0;
+    duration        1e9;
+    selectionMode   cellZone;
+    cellZone        fuel;
+    volumeMode      specific;
+    injectionRateSuSp
+    {
+        T           (1.49783e6 0);   // t=0 decay q''' [W/m^3] (stock-solver stand-in; unused by T-solver)
+    }
+}
+
+// ************************************************************************* //

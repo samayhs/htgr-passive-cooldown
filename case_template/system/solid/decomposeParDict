@@ -1,0 +1,19 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system/solid";
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// Domain decomposition for the solid region (graphite matrix + fuel cellZone).
+// scotch graph partitioning with load balancing. 16 subdomains -> ~58k solid
+// cells each. Must use the same subdomain count as the fluid region so the coupled
+// interface decomposes consistently for the parallel CHT run.
+
+numberOfSubdomains  16;
+method              scotch;
+
+// ************************************************************************* //

@@ -1,0 +1,43 @@
+/*--------------------------------*- C++ -*----------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant/solid";
+    object      heatSource;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// LOFC variant: DECAY heat, time-dependent. q'''(t) = q'''_op * f_decay(t), decay
+// clock from t=0, spatially uniform on the "fuel" cellZone. Read by the T-solver as a
+// Function1<scalar> (see solver setRegionSolidFields.H); a bare scalar still parses as
+// constant, so this table drives only the transient.
+//
+// q'''_op = 24.83 MW/m^3 (fuel-local, AVERAGE column; 5.93 MW/m^3 block-avg / 0.2389).
+//   For the PEAK column, scale every value below by 46.05/24.83 = 1.8546.
+// f_decay(t): Way-Wigner interim correlation  P/P0 = 0.0622*(t^-0.2 - (t+T0)^-0.2),
+//   T0 = 4.0e7 s (EOEC irradiation time). INTERIM: DIN 25485 (benchmark family) or
+//   ANS-5.1 is the intended upgrade once fit coefficients are available (the three
+//   agree within a few %). Way-Wigner biases the long-time tail slightly low.
+//
+//                   q''' [W/m^3]     ( f_decay,  time )
+qVol    table
+(
+    (0        1.49783e6)   //  6.03 %   0 h
+    (1        1.49783e6)   //  6.03 %
+    (3        1.19318e6)   //  4.81 %
+    (10       0.92787e6)   //  3.74 %
+    (30       0.735648e6)  //  2.96 %   trip (~30-60 s)
+    (100      0.568250e6)  //  2.29 %
+    (300      0.446967e6)  //  1.80 %
+    (1000     0.341346e6)  //  1.37 %
+    (3600     0.253670e6)  //  1.02 %   1 h
+    (10000    0.198181e6)  //  0.80 %   2.8 h
+    (30000    0.149901e6)  //  0.60 %   8.3 h
+    (100000   0.107869e6)  //  0.43 %   27.8 h
+    (180000   0.090758e6)  //  0.37 %   50 h
+    (360000   0.073025e6)  //  0.29 %   100 h
+);
+zone    fuel;
+
+// ************************************************************************* //

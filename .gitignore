@@ -1,0 +1,30 @@
+# OpenFOAM run outputs (regenerated) — keep only tracked source (0.orig, system, constant/*, scripts)
+cases/**/[0-9]*/
+cases/**/processor*/
+cases/**/*.foam
+cases/**/log.*
+cases/**/postProcessing/
+cases/**/runs/**/fields/
+case_template/[0-9]*/
+case_template/processor*/
+
+# meshes are regenerated from geometry/*.py
+*.msh
+**/polyMesh/
+**/constant/*/polyMesh/
+constant/cellToRegion*
+
+# OpenFOAM solver build artifacts (rebuilt by Allwmake)
+**/linux64*/
+**/lnInclude/
+*.o
+*.so
+*.dep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# generated mesh metadata (written by make_full_block.py)
+geometry/fuel_zones.json
