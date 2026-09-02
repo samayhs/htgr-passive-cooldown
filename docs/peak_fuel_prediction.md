@@ -211,7 +211,7 @@ Two independent kinds of evidence, both required, are reported honestly below.
 | Check | Result | Status |
 |---|---|---|
 | Transient energy conservation `ΔU = ∫P_decay dt − ∫Q_out dt` (all terms solver-exact, in-solver monitor) | imbalance **0.083%** (Δt_max=100 s), **0.241%** (Δt_max=50 s) on 2.64 M; **0.80%** on the 9.15 M grid-converged mesh | ✅ PASS (<1%) — transfers across meshes |
-| Time-step independence | peak fuel **778.0 °C identical** at both Δt; ΔU matches to 0.05% | ✅ PASS |
+| Time-step independence | peak fuel identical at both Δt (778.0 °C, medium-mesh Δt study); ΔU matches to 0.05% | ✅ PASS |
 | Cooldown τ vs analytic lumped-capacitance `τ = ρc·V/(h_rad·A)` | CFD ~121 min vs analytic 128 min (~5%) | ✅ sanity pass |
 | **Steady grid independence (4 meshes)** | near-second-order convergence (p≈2.15), GCI 0.95%, extrapolated peak 799 °C; outlet within 0.2% of benchmark | ✅ PASS (see §6d) |
 
@@ -240,18 +240,19 @@ full-field enthalpy integration (−584 MJ), and the decay-minus-radiation budge
 - **Mechanism:** on coarse meshes numerical diffusion under-mixes the resolved coolant (lower
   outlet), and the fuel tracks it — that is why peak and outlet drift together by ~9 °C/level;
   it converges out by the finest mesh.
-- **Consequence for the reported numbers:** the medium mesh (782 °C, used for the LOFC-case IC)
-  **under-resolves the peak by ~17 °C** vs the grid-converged value. **Best estimate: peak fuel ≈
-  799 °C** (Richardson) / 793 °C on the finest mesh, GCI ~1% (±~7 °C); **margin ≈ 801 °C** to the
-  TRISO limit. This is a *steady-state, average-column* value.
+- **Consequence for the reported numbers:** the medium mesh (782 °C) **under-resolves the peak by
+  ~17 °C** vs the grid-converged value, so the LOFC case was re-run from the grid-converged
+  (9.15 M) Phase-0 field (IC ~793 °C). **Best estimate: steady peak fuel ≈ 799 °C** (Richardson) /
+  793 °C on the finest mesh, GCI ~1% (±~7 °C); **margin ≈ 801 °C** to the TRISO limit. This is a
+  *steady-state, average-column* value.
 
 ### 6b. Validation — *is it the right physics?* (agreement with the benchmark codes)
 
 | Metric | This model | Benchmark | Assessment |
 |---|---|---|---|
-| Steady coolant outlet | 673 °C | 687 °C | **comparable (~2%)** — the clean, tabulated validation quantity |
-| Steady peak fuel (avg column) | 782 °C | ~1282 °C is the *core max* (peak column) | consistent for an average column; peak-column run needed to target 1282 °C |
-| **Accident peak fuel(t)** | 778 °C @ t≈0, then cools | 1391 K @ 50 h (block) / 1237 K @ 74 h (ring) | **CANNOT be validated at block scale** — the reference peak is a full-core phenomenon (§0) |
+| Steady coolant outlet | 688 °C | 687 °C | **comparable (0.2%)** — the clean, tabulated validation quantity |
+| Steady peak fuel (avg column) | ~793 °C (Richardson ~799) | ~1282 °C is the *core max* (peak column) | consistent for an average column; peak-column run needed to target 1282 °C |
+| **LOFC-case peak fuel(t)** | ~793 °C @ t≈0, then cools | 1391 K @ 50 h (block) / 1237 K @ 74 h (ring) | **CANNOT be validated at block scale** — the reference peak is a full-core phenomenon (§0) |
 
 The benchmark is **code-to-code, not experimental**: "validated" means agreement with
 PHISICS/RELAP5-3D, not with measured reality.
@@ -266,7 +267,7 @@ PHISICS/RELAP5-3D, not with measured reality.
 | Way–Wigner long-time tail slightly low | mildly non-conservative |
 
 **Net:** the non-conservative effects dominate. The block-scale LOFC case **under-predicts** the
-true core peak, which is exactly why the modeled peak (778 °C, at t=0) sits far below the
+true core peak, which is exactly why the modeled peak (~793 °C, at t=0) sits far below the
 benchmark full-core peak (~1118 °C, at 50 h). The block result is a **lower bound on plausible
 behaviour, not an upper-bound safety margin.**
 
@@ -306,7 +307,7 @@ integrator are the foundation that step builds on.
   the transient integrator (energy-conservative to <0.25%, step-independent). The methodology is
   verified, the steady physics is comparable to the reference, and the steady peak is
   grid-converged (4-mesh study, p≈2.15, GCI ~1%, ~±7 °C).
-- **Do not use as a safety peak:** the block-scale passive-cooldown peak (778 °C, margin 822 °C).
+- **Do not use as a safety peak:** the block-scale LOFC-case peak (~793 °C, margin ~807 °C).
   It is illustrative and **non-conservative** — it under-predicts the true core peak because a
   single block radiates directly to the RCCS and cannot form the 50–74 h delayed peak.
 - **The governing number** for the MHTGR-350 passive-cooldown safety case remains the benchmark

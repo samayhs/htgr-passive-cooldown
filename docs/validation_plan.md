@@ -70,14 +70,25 @@ conduction cooldown honestly — **illustrative, not matching**. PCC is out of b
 
 Steady state validated-comparable to GA (MHTGR-350). One block-scale LOFC conduction cooldown
 (solid conduction + decay heat + radiative RCCS rejection), reported as illustrative — peak
-fuel X °C, margin to 1600 °C. It cannot reproduce the benchmark full-core DCC peak
-(1,391 K @ 50 h); that delayed peak is a whole-core radial-conduction phenomenon and is named
-as the next-fidelity step (effective-core radial model). PCC is out of block scope — its
-convective/recirculation mechanism is core-scale.
+fuel **~793 °C** (average column, grid-converged), margin **~807 °C** to 1600 °C. It cannot
+reproduce the benchmark full-core DCC peak (1,391 K @ 50 h); that delayed peak is a whole-core
+radial-conduction phenomenon and is named as the next-fidelity step (effective-core radial
+model). PCC is out of block scope — its convective/recirculation mechanism is core-scale.
+
+## Status
+
+Phase 0 (steady) **complete, grid-converged** (4 meshes, GCI ~1%; outlet 688 °C vs 687 °C).
+Phase 1 (verification) **complete** — energy conservation <0.8%, Δt-independent. LOFC case
+**complete** (illustrative): peak fuel ~793 °C, margin ~807 °C. Full write-up:
+[`peak_fuel_prediction.md`](peak_fuel_prediction.md).
 
 ## Open items
 
-- Pin `Tfuel_max` (~1282 °C) to a primary results table for the Phase-0 comparability band.
+- **Peak-column run** (×1.85 power → ~46 MW/m³ fuel-local) to target the ~1282 °C core max —
+  results to date are the *average* column.
+- **Full-core / effective-core radial model** — the governing safety peak (1391 K @ 50 h) is a
+  whole-core phenomenon the block cannot reach; the next-fidelity step.
 - κ(T) upgrade: irradiated EOEC block-avg fluence (Table AIV.2 + Appendix VIII) — currently
   un-irradiated fallback (biases the peak low); needs the fluence file, not in the repo.
 - Decay-heat upgrade: DIN 25485 / ANS-5.1 fit to replace the Way–Wigner interim.
+- Pin `Tfuel_max` (~1282 °C) to a primary results table for the Phase-0 comparability band.

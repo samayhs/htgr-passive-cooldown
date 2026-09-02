@@ -52,15 +52,25 @@ htgr-passive-cooldown/
 │   ├── phase0_steady/                  normal-op steady, validated to benchmark
 │   ├── phase1_transient_verification/  transient machinery vs analytic τ
 │   └── phase_lofc/                     block-scale LOFC conduction cooldown (illustrative)
-├── docs/            validation plan + metric acceptance criteria
+├── docs/            validation plan + peak-fuel prediction report (results & accuracy)
 └── RUNNING.md       how to build the solver, mesh, and run each phase
 ```
 
-## Status
+## Status & results
 
-Scaffold. Reusable assets (benchmark reference, block geometry generator, T-solver, case
-config) are ported from the parent `prismatic-microreactor-thermal` project; the four phase
-cases are stubs to be built out per [`docs/validation_plan.md`](docs/validation_plan.md).
+Built out and run on an 8 m / 10-block column, **grid-converged**. Full write-up — methodology,
+boundary conditions, inputs, assumptions, and accuracy assessment — is in
+[`docs/peak_fuel_prediction.md`](docs/peak_fuel_prediction.md).
+
+| Phase | Status | Key result |
+|---|---|---|
+| 0 — steady (validation) | ✅ complete; grid-converged (4 meshes, GCI ~1%) | coolant outlet **688 °C** vs benchmark 687 °C (**0.2%**); peak fuel, avg column **~793 °C** (Richardson ~799 °C) |
+| 1 — transient verification | ✅ complete | energy conservation **<0.8%** (in-solver monitor); Δt-independent |
+| LOFC — conduction cooldown | ✅ complete (illustrative) | peak fuel **~793 °C** at t≈0, **margin ~807 °C** to 1600 °C; monotonic cooldown, no delayed peak |
+
+**Bounding caveat:** the LOFC block result is *illustrative and non-conservative* — a single
+block radiates straight to the RCCS and cannot form the full-core delayed peak (**1391 K @ 50 h**),
+which remains the governing safety number and the next-fidelity step (effective-core radial model).
 
 ## Provenance
 

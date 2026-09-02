@@ -17,29 +17,44 @@ modified.
 
 ## 1. Generate the block mesh (Windows Python + gmsh)
 
-```bash
-# single 0.793 m block (default af=0.36):
-python geometry/make_full_block.py --lc 0.003 --nz 40 --out geometry/full_block.msh
-# 8 m / 10-block column (for axial coolant heat-up):
-python geometry/make_full_block.py --lc 0.0035 --nz 160 --length 8.0 --out geometry/full_block_stack.msh
-```
-
-## 2. Set up and run a phase case
-
-Each `cases/<phase>/` is built from `case_template/` with its phase-specific conditions
-(pressure, inlet T, velocity, power, decay heat, boundary treatment) — see the phase README and
-[`docs/validation_plan.md`](docs/validation_plan.md). General flow (in WSL):
+The validated results use the **8 m / 10-block column** (needed for the 259→687 °C coolant
+heat-up). `--lc` sets the cross-section cell size, `--nz` the axial divisions:
 
 ```bash
-cd cases/<phase>
-bash setup_case.sh        # gmshToFoam, split regions, apply BCs/fields
-NP=16 bash run.sh         # decompose, solve in parallel, reconstruct
+# 8 m column, medium mesh (~2.64 M cells):
+python geometry/make_full_block.py --lc 0.004 --nz 120 --length 8.0 --out geometry/full_block.msh
 ```
 
-The transient LOFC cooldown (phase_lofc) starts from the Phase-0 operating steady field — run
-Phase 0 first.
+Grid-independence study meshes (Phase-0 is grid-converged across these — GCI ~1%):
+`--lc 0.0055 --nz 88` (1.14 M) · `--lc 0.004 --nz 120` (2.64 M) · `--lc 0.0028 --nz 168`
+(6.14 M) · `--lc 0.0024 --nz 200` (9.15 M). Meshes are gitignored — regenerate as needed.
 
-## 3. Extract metrics
+## 2. Run Phase 0 (steady), then the LOFC cooldown
 
-Peak fuel, coolant profile, energy balance, and cooldown τ are pulled with the `extract_*` /
-`*_metrics.py` tooling in `geometry/` (ported from the parent project; adapt per phase).
+A run needs `case_template/` + the mesh + `geometry/*.py`. Phase 0 is the base two-region
+config; the LOFC cooldown reuses the same mesh and starts from the Phase-0 steady field.
+
+```bash
+# Phase 0 — steady, two-region CHT (helium channels + solid), 16-way parallel:
+NP=16 bash run.sh          # gmshToFoam -> split -> fuel topoSet -> decompose -> solve -> reconstruct
+# steadyState; peak fuel plateaus by ~350-400 iters -> stop on a converged write.
+
+# LOFC conduction cooldown — solid-only, from the Phase-0 field:
+bash run_lofc.sh           # snapshots the steady field, stages lofc/ dicts, runs the transient
+```
+
+`run_lofc.sh` drops the fluid region (channels adiabatic), applies the RCCS radiation outer BC
+(303 K, ε 0.85), and marches the time-dependent decay heat. **Run Phase 0 first.**
+
+## 3. Metrics & verification
+
+- **LOFC metrics** — `geometry/lofc_metrics.py` (invoked by `run_lofc.sh`) writes peak fuel(t),
+  time-to-peak, quasi-steady peak, cooldown τ, TRISO margin, and an energy-balance check to
+  `runs/lofc/`.
+- **Phase-1 energy conservation** — the solver emits an `ENERGYMON <t> <U> <P_decay> <Q_out>`
+  line each timestep (∫ρh dV, ∫Q dV, ∫−κ∇T·n over outerWall); integrating verifies
+  `ΔU = ∫P_decay − ∫Q_out` closes to <1% (achieved: <0.8%, Δt-independent).
+- Steady outlet and peak fuel are read from the reconstructed fluid/solid fields.
+
+Results and the full accuracy assessment are in
+[`docs/peak_fuel_prediction.md`](docs/peak_fuel_prediction.md).
