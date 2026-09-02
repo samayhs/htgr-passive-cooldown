@@ -45,8 +45,16 @@ GCI ~0.95%; the 2.64 M mesh used for the LOFC-case IC under-resolves the peak by
 
 *Note:* the widely-cited benchmark steady peak fuel **~1282 °C** is the *core maximum* — the
 hottest 1/6-block in the hottest (peak-power) column. Our **average-power** column peaks lower
-(793 °C ≈ outlet 688 °C + fuel-to-coolant ΔT ~105 °C), which is physically consistent. Matching
-~1282 °C requires the **peak-column** run (power ×1.85; see §4), not yet executed.
+(793 °C ≈ outlet 688 °C + fuel-to-coolant ΔT ~105 °C), which is physically consistent.
+
+**Peak-column run (power ×1.85 → 46 MW/m³ fuel-local, fine mesh):** steady peak fuel **1268 °C**
+vs benchmark **~1282 °C** — **within ~1%**, so the peak column reproduces the benchmark core max.
+(Its coolant outlet, ~1050 °C, is *not* benchmark-comparable — ×1.85 power at the same channel
+flow heats the coolant ~1.85×; in the real core the peak column is orificed.) The peak-column
+**LOFC case**: peak fuel **1268 °C** at t≈0, **margin ~332 °C** to TRISO, cooling monotonically to
+~367 °C (τ ~59–108 min). Note the peak-column steady (1268 °C) is the normal-op max and the block
+LOFC cools from it; the benchmark full-core DCC delayed peak (1118 °C) sits *below* the steady
+peak — i.e. the MHTGR-350 passive cooldown does not exceed normal-operation fuel temperatures.
 
 ### 1b. Passive cooldown — the LOFC case
 
@@ -176,7 +184,7 @@ in prior work).
 | Input | Value | Source | Caveat |
 |---|---|---|---|
 | Form | `q‴(t) = q‴_op · f_decay(t)`, spatially uniform on the fuel zone, clock from t = 0 | benchmark §I.7.4 (decay ∝ steady local power) | — |
-| f_decay(t) | **Way–Wigner** interim: `0.0622·(t^−0.2 − (t+T₀)^−0.2)`, T₀ = 4×10⁷ s; ~6.0% at t≈0 → ~0.29% at 100 h | standard shutdown correlation | **interim** — DIN 25485 / ANS-5.1 is the intended upgrade (agree within a few %); Way–Wigner biases the long-time tail slightly low |
+| f_decay(t) | **ANS-5.1-family** standard U-235 decay-heat curve, tabulated from published decay fractions; 6.05% @1s → 1.35% @1h → 0.77% @8.3h → 0.36% @100h (monotonic) | standard shutdown decay | exact ANS-5.1 23-group coefficient table not in the repo; this anchored curve reproduces the standard fractions to ~a few % (their read accuracy). Replaced the earlier Way–Wigner interim, which ran ~20–45% low in the mid/long tail |
 | q‴_op | 24.83 MW/m³ (average) or 46.05 (peak column) | §4a | — |
 
 ---
@@ -186,12 +194,12 @@ in prior work).
 1. **Single block / single column**, not the annular core. *(Governs everything — see §0.)*
 2. **Adiabatic lateral walls in steady** (interior-column symmetry); **radiation-to-RCCS at the
    block surface in the LOFC case** (lumped surrogate, non-conservative).
-3. **Average-power column** for the runs shown; the peak column (×1.85) is a swappable input,
-   not yet run.
+3. **Both average and peak columns run** (peak = ×1.85 power); the average column validates the
+   outlet, the peak column reaches the benchmark core-max fuel temperature.
 4. **Un-irradiated κ(T)** (irradiated data and the fluence file were not available in the
    distributed benchmark materials).
-5. **Way–Wigner decay** (interim) rather than the benchmark's DIN 25485 per-block fit
-   (coefficients not in the distributed materials).
+5. **ANS-5.1-family decay** anchored to the standard's published decay fractions, rather than the
+   benchmark's exact DIN 25485 / ANS-5.1 coefficient table (not in the distributed materials).
 6. **Uniform-in-z power** (no axial power shape).
 7. **Fuel as a heat-source zone in uniform H-451** (no distinct compact/gap conductivities).
 8. **Fixed post-blowdown pressure**; the 0–20 s depressurisation transient is not modeled
@@ -210,7 +218,7 @@ Two independent kinds of evidence, both required, are reported honestly below.
 
 | Check | Result | Status |
 |---|---|---|
-| Transient energy conservation `ΔU = ∫P_decay dt − ∫Q_out dt` (all terms solver-exact, in-solver monitor) | imbalance **0.083%** (Δt_max=100 s), **0.241%** (Δt_max=50 s) on 2.64 M; **0.80%** on the 9.15 M grid-converged mesh | ✅ PASS (<1%) — transfers across meshes |
+| Transient energy conservation `ΔU = ∫P_decay dt − ∫Q_out dt` (all terms solver-exact, in-solver monitor) | avg column: **0.08%** (Δt 100 s), **0.24%** (Δt 50 s), **0.80%** (9.15 M mesh) — PASS. Peak column: **1.84%** — marginally >1% (wide T swing 1268→367 °C amplifies the cp(T) discretisation error in the T-based ddt) | ✅ avg-column PASS; ⚠️ peak-column 1.84% (peak itself is exact — it's the steady IC; the cooldown trajectory carries ~1.8% slop) |
 | Time-step independence | peak fuel identical at both Δt (778.0 °C, medium-mesh Δt study); ΔU matches to 0.05% | ✅ PASS |
 | Cooldown τ vs analytic lumped-capacitance `τ = ρc·V/(h_rad·A)` | CFD ~121 min vs analytic 128 min (~5%) | ✅ sanity pass |
 | **Steady grid independence (4 meshes)** | near-second-order convergence (p≈2.15), GCI 0.95%, extrapolated peak 799 °C; outlet within 0.2% of benchmark | ✅ PASS (see §6d) |
@@ -264,12 +272,18 @@ PHISICS/RELAP5-3D, not with measured reality.
 | Adiabatic channels (no coolant heat removal) | **conservative** (over-predicts) |
 | **Radiation to RCCS at the block surface** (no core radial resistance) | **strongly non-conservative** (under-predicts) — dominant |
 | Un-irradiated κ (higher than irradiated) | **non-conservative** (under-predicts; irradiation lowers κ → hotter) |
-| Way–Wigner long-time tail slightly low | mildly non-conservative |
+| ANS-5.1-family decay (replaced Way–Wigner) | tail now standard; Way–Wigner had run ~20–45% low mid/late |
 
-**Net:** the non-conservative effects dominate. The block-scale LOFC case **under-predicts** the
-true core peak, which is exactly why the modeled peak (~793 °C, at t=0) sits far below the
-benchmark full-core peak (~1118 °C, at 50 h). The block result is a **lower bound on plausible
-behaviour, not an upper-bound safety margin.**
+**Net — it depends which column, and it's not one-directional:**
+- **Average column:** the non-conservative effects dominate; its 793 °C sits *below* the benchmark
+  full-core DCC peak (1118 °C) — an **under-prediction**.
+- **Peak column:** its steady/IC peak (**1268 °C**, ≈ benchmark core max 1282 °C) *exceeds* the
+  full-core DCC delayed peak (1118 °C), so it **brackets the safety-relevant fuel temperature from
+  above** (and the block LOFC only cools from it).
+
+Either way the block cannot reproduce the delayed-peak *mechanism*; it delivers the bounding
+steady/IC peak and a cooldown from it. The peak-column steady (1268 °C, margin 332 °C to TRISO) is
+the most safety-relevant single number this work produces.
 
 ---
 
@@ -278,9 +292,10 @@ behaviour, not an upper-bound safety margin.**
 | Source | Direction / magnitude | Mitigation / next step |
 |---|---|---|
 | **No core radial conduction path (block ≠ core)** | Large; under-predicts core peak; removes the delayed peak | Full-core or effective-core radial model (see §8) |
-| Average vs peak column | Peak column runs hotter (power ×1.85) | Run the peak column |
+| Average vs peak column | Both run: avg 793 °C (validates outlet); peak 1268 °C ≈ benchmark 1282 °C | Done |
 | Un-irradiated κ | Under-predicts peak | Obtain EOEC fluence + Table AIV.2 irradiated coefficients |
-| Way–Wigner decay | Tail slightly low | Substitute DIN 25485 / ANS-5.1 fit |
+| Decay heat | ANS-5.1-family (anchored to standard fractions, ~few %) | Exact DIN 25485 / ANS-5.1 23-group table if provided |
+| Peak-column transient energy closure | 1.84% (>1%; wide-T cp(T) effect) | Smaller Δt near t=0, or enthalpy-form ddt |
 | Steady grid resolution | Converged (p≈2.15, GCI 0.95%); peak grid uncertainty ~±7 °C; outlet within 0.2% of benchmark (§6d) | Closed (4-mesh study) |
 | Steady peak-fuel reference (~1282 °C) is a secondary value | Reference-band uncertainty | Pin to a primary results table |
 

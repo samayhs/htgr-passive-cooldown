@@ -49,7 +49,7 @@ conduction cooldown honestly — **illustrative, not matching**. PCC is out of b
 |---|---|
 | **Model** | solid-only: solid conduction + decay heat + radiative RCCS rejection. In-channel He stagnant → channels adiabatic (conservative: traps heat). Corresponds to the benchmark depressurised/stagnant DCC family. |
 | **Initiating event** | forced cooling lost, reactor trip; primary depressurised/stagnant; flow → 0. |
-| **Decay heat** | `q'''(t) = q'''_op · f_decay(t)`, clock from t=0, **Way–Wigner interim** (DIN 25485 / ANS-5.1 the intended upgrade), uniform on the fuel zone. |
+| **Decay heat** | `q'''(t) = q'''_op · f_decay(t)`, clock from t=0, **ANS-5.1-family** standard decay curve (anchored to published fractions), uniform on the fuel zone. |
 | **Outer BC** | radiation to RCCS sink (303 K, ε 0.85); axial ends adiabatic. |
 | **Metrics** | peak fuel(t), time-to-peak, quasi-steady peak, cooldown τ, margin to 1600 °C. |
 | **Reference (full core)** | **1,391 K (≈1,118 °C) @ 50 h** (block model) / 1,237 K @ 74 h (ring model) — **not** reproducible at block scale. |
@@ -78,17 +78,19 @@ model). PCC is out of block scope — its convective/recirculation mechanism is 
 ## Status
 
 Phase 0 (steady) **complete, grid-converged** (4 meshes, GCI ~1%; outlet 688 °C vs 687 °C).
-Phase 1 (verification) **complete** — energy conservation <0.8%, Δt-independent. LOFC case
-**complete** (illustrative): peak fuel ~793 °C, margin ~807 °C. Full write-up:
-[`peak_fuel_prediction.md`](peak_fuel_prediction.md).
+Phase 1 (verification) **complete** — energy conservation <0.8% (avg column), Δt-independent.
+LOFC case **complete** (illustrative): **average column** peak ~793 °C, margin ~807 °C;
+**peak column** peak **1268 °C** (≈ benchmark core max 1282 °C), margin ~332 °C. Decay heat is
+the **ANS-5.1-family** curve. Full write-up: [`peak_fuel_prediction.md`](peak_fuel_prediction.md).
 
 ## Open items
 
-- **Peak-column run** (×1.85 power → ~46 MW/m³ fuel-local) to target the ~1282 °C core max —
-  results to date are the *average* column.
 - **Full-core / effective-core radial model** — the governing safety peak (1391 K @ 50 h) is a
   whole-core phenomenon the block cannot reach; the next-fidelity step.
 - κ(T) upgrade: irradiated EOEC block-avg fluence (Table AIV.2 + Appendix VIII) — currently
   un-irradiated fallback (biases the peak low); needs the fluence file, not in the repo.
-- Decay-heat upgrade: DIN 25485 / ANS-5.1 fit to replace the Way–Wigner interim.
+- Exact DIN 25485 / ANS-5.1 23-group decay-heat table (the current curve is anchored to the
+  standard's published fractions, ~few %).
+- Peak-column transient energy closure is **1.84%** (>1% target) — tighten with smaller Δt near
+  t=0 or an enthalpy-form ddt (the wide 1268→367 °C swing amplifies the cp(T) discretisation error).
 - Pin `Tfuel_max` (~1282 °C) to a primary results table for the Phase-0 comparability band.

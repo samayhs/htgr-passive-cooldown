@@ -64,9 +64,9 @@ boundary conditions, inputs, assumptions, and accuracy assessment — is in
 
 | Phase | Status | Key result |
 |---|---|---|
-| 0 — steady (validation) | ✅ complete; grid-converged (4 meshes, GCI ~1%) | coolant outlet **688 °C** vs benchmark 687 °C (**0.2%**); peak fuel, avg column **~793 °C** (Richardson ~799 °C) |
-| 1 — transient verification | ✅ complete | energy conservation **<0.8%** (in-solver monitor); Δt-independent |
-| LOFC — conduction cooldown | ✅ complete (illustrative) | peak fuel **~793 °C** at t≈0, **margin ~807 °C** to 1600 °C; monotonic cooldown, no delayed peak |
+| 0 — steady (validation) | ✅ complete; grid-converged (4 meshes, GCI ~1%) | outlet **688 °C** vs 687 °C (**0.2%**); peak fuel avg column **~793 °C**, **peak column 1268 °C** vs benchmark ~1282 °C (**~1%**) |
+| 1 — transient verification | ✅ complete | energy conservation **<0.8%** avg column (in-solver monitor); Δt-independent |
+| LOFC — conduction cooldown | ✅ complete (illustrative) | avg column **~793 °C** (margin ~807 °C); **peak column 1268 °C** (margin ~332 °C); monotonic cooldown, no delayed peak |
 
 **Bounding caveat:** the LOFC block result is *illustrative and non-conservative* — a single
 block radiates straight to the RCCS and cannot form the full-core delayed peak (**1391 K @ 50 h**),

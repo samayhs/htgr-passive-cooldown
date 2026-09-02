@@ -175,7 +175,7 @@ with open(os.path.join(OUT, "peak.txt"), "w") as f:
 with open(os.path.join(OUT, "config.txt"), "w") as f:
     f.write("variant lofc_conduction_cooldown\n")
     f.write("model solid-only: conduction + decay heat q'''(t) + radiative RCCS rejection\n")
-    f.write("q_decay Way-Wigner q'''(t) table (heatSource); q_op 24.83 MW/m3 fuel-local (avg column)\n")
+    f.write("q_decay ANS-5.1-family q'''(t) table (heatSource); q_op 24.83 (avg) or 46.05 (peak) MW/m3 fuel-local\n")
     f.write("outer_wall externalWallHeatFluxTemperature radiation to RCCS Ta=303K emissivity=0.85\n")
     f.write("channels adiabatic (forced cooling lost; He stagnant/dropped)\n")
     f.write("axial_ends adiabatic (interior of column)\n")
