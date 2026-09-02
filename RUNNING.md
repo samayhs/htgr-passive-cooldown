@@ -44,7 +44,16 @@ bash run_lofc.sh           # snapshots the steady field, stages lofc/ dicts, run
 ```
 
 `run_lofc.sh` drops the fluid region (channels adiabatic), applies the RCCS radiation outer BC
-(303 K, ε 0.85), and marches the time-dependent decay heat. **Run Phase 0 first.**
+(303 K, ε 0.85), and marches the time-dependent decay heat (ANS-5.1-family). **Run Phase 0 first.**
+
+**Average vs peak column.** The base power is the average column (`heatSource` qVol =
+24.83 MW/m³ fuel-local). For the **peak column** (×1.85, targets the ~1282 °C core max), set the
+power before Phase 0 and scale the LOFC decay table by 1.8546:
+
+```bash
+foamDictionary -entry qVol -set 46.05e6 constant/solid/heatSource   # peak-column steady power
+# ... run Phase 0, then scale lofc/heatSource decay values x1.8546 for the LOFC run.
+```
 
 ## 3. Metrics & verification
 

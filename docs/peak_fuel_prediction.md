@@ -12,22 +12,26 @@ Design* (NEA/NSC/R(2017)4) — a **code-to-code** benchmark, not experimentally 
 This model resolves **one prismatic fuel block / one coolant-channel column**, not the full
 annular core. That scope decision governs how the result must be read:
 
-- **The block-scale passive-cooldown prediction is *illustrative* and *non-conservative* for
-  the true core peak.** A single block radiates directly to the Reactor Cavity Cooling System
-  (RCCS) sink from its own outer surface. In the real core, decay heat must first conduct
-  *radially across ~660 blocks* before it reaches the RCCS; that thermal resistance is what
-  traps heat and produces the benchmark's delayed peak. Our single block has none of it, so it
-  **over-cools** and its peak forms at *t ≈ 0*, not at the 50–74 h the full core exhibits.
-- **The number the team should carry for the block deliverable:** peak fuel **≈ 793 °C** at the
-  onset of the transient, giving **≈ 807 °C margin** to the 1600 °C TRISO/SiC limit — *for an
-  average-power column, at block scale, on the grid-converged mesh, with the caveats below.*
-- **The number that governs the real safety case** — the full-core delayed peak, **1391 K
-  (≈1118 °C) at 50 h** (benchmark block model) / **1237 K at 74 h** (ring model) — **cannot be
-  reproduced by this model** and is named here as the next-fidelity step.
+- **Peak fuel — the two block-scale numbers:**
+  - *Average-power column:* peak fuel **≈ 793 °C** at t≈0, margin **≈ 807 °C** to the 1600 °C
+    TRISO/SiC limit. This validates the steady baseline but under-predicts the core (it's the
+    average column, not the hot one).
+  - *Peak-power column (×1.85):* steady/IC peak fuel **1268 °C** (≈ benchmark core max ~1282 °C,
+    within ~1%), margin **≈ 332 °C**. **This is the safety-relevant block-scale number.**
+- **The block cools from its steady peak — it has no delayed peak.** A single block radiates
+  directly to the Reactor Cavity Cooling System (RCCS) from its own outer surface; in the real
+  core, decay heat must first conduct *radially across ~660 blocks*, and that resistance produces
+  the benchmark's 50–74 h delayed peak. Our block has none of it, so its peak is at *t ≈ 0* and it
+  cools monotonically.
+- **Where the block sits vs the full-core reference:** the benchmark full-core DCC delayed peak is
+  **1391 K (≈1118 °C) at 50 h** (block model) / 1237 K @ 74 h (ring). The peak-column steady/IC
+  (**1268 °C**) **exceeds** it — so it **brackets the full-core DCC peak from above**, while the
+  average column (793 °C) sits below it. The block cannot reproduce the delayed-peak *mechanism or
+  timing*, but the peak-column steady is a defensible upper-bracket on the fuel temperature.
 
-If you need a defensible bounding peak-fuel temperature for the MHTGR-350 passive cooldown, use
-the benchmark's full-core value and treat this block result as a verified, correctly-scoped
-building block toward it — not as the answer.
+**Bottom line:** carry the **peak-column steady/IC — 1268 °C, margin ~332 °C** — as the block-scale
+bounding estimate. The full-core radial model remains the next-fidelity step for the delayed-peak
+mechanism itself (its 1118 °C sits below the block bracket).
 
 ---
 
@@ -291,7 +295,7 @@ the most safety-relevant single number this work produces.
 
 | Source | Direction / magnitude | Mitigation / next step |
 |---|---|---|
-| **No core radial conduction path (block ≠ core)** | Large; under-predicts core peak; removes the delayed peak | Full-core or effective-core radial model (see §8) |
+| **No core radial conduction path (block ≠ core)** | Removes the delayed peak (block cools from its IC); the average column then under-predicts, the peak column brackets the DCC peak from above | Full-core / effective-core radial model (see §8) |
 | Average vs peak column | Both run: avg 793 °C (validates outlet); peak 1268 °C ≈ benchmark 1282 °C | Done |
 | Un-irradiated κ | Under-predicts peak | Obtain EOEC fluence + Table AIV.2 irradiated coefficients |
 | Decay heat | ANS-5.1-family (anchored to standard fractions, ~few %) | Exact DIN 25485 / ANS-5.1 23-group table if provided |
@@ -319,20 +323,23 @@ integrator are the foundation that step builds on.
 ## 9. Bottom line for the team
 
 - **Trust:** the steady baseline (grid-converged outlet 688 °C vs benchmark 687 °C, **0.2%**) and
-  the transient integrator (energy-conservative to <0.25%, step-independent). The methodology is
-  verified, the steady physics is comparable to the reference, and the steady peak is
-  grid-converged (4-mesh study, p≈2.15, GCI ~1%, ~±7 °C).
-- **Do not use as a safety peak:** the block-scale LOFC-case peak (~793 °C, margin ~807 °C).
-  It is illustrative and **non-conservative** — it under-predicts the true core peak because a
-  single block radiates directly to the RCCS and cannot form the 50–74 h delayed peak.
-- **The governing number** for the MHTGR-350 passive-cooldown safety case remains the benchmark
-  full-core value, **1391 K (≈1118 °C) at 50 h**, which this work correctly scopes toward rather
-  than claims to reproduce.
+  the transient integrator (energy-conservative to **<0.8%** for the average column, step-independent;
+  1.84% for the peak column — wide-T). The methodology is verified, the steady physics is comparable
+  to the reference, and the steady peak is grid-converged (4-mesh study, p≈2.15, GCI ~1%, ~±7 °C).
+- **The block-scale bounding number: the peak-column steady/IC — 1268 °C, margin ~332 °C.** It
+  validates to the benchmark core max (~1282 °C, ~1%) and **exceeds** the full-core DCC delayed
+  peak (1118 °C), so it brackets the safety-relevant fuel temperature from above. Do **not** use the
+  *average*-column peak (793 °C) as a safety number — it under-predicts (it is the average, not the
+  hot column).
+- **What the block cannot do:** reproduce the delayed-peak *mechanism and 50–74 h timing* — that
+  needs the full-core radial model (§8). Its reference peak (1118 °C) lies *below* the block bracket,
+  so the block does not under-state the peak-column fuel temperature.
 
 ---
 
-*Provenance: results produced with `chtMultiRegionTFoam` (OpenFOAM 7) on an 8 m / 10-block
-column (2.64 M cells). Phase 0 steady converged; Phase LOFC transient run to 30 000 s (8.3 h) at
-two time steps; Phase 1 energy conservation verified in-solver. Benchmark data and page cites in
-[`../benchmark/README.md`](../benchmark/README.md); verification-and-validation plan in
+*Provenance: results produced with `chtMultiRegionTFoam` (OpenFOAM 7) on the 8 m / 10-block
+column. Phase 0 steady grid-converged over four meshes (1.14–9.15 M cells); average- and
+peak-column (×1.85) Phase-0 runs; Phase LOFC transient run to 30 000 s (8.3 h) with ANS-5.1-family
+decay, energy conservation verified in-solver, Δt-independence checked. Benchmark data and page
+cites in [`../benchmark/README.md`](../benchmark/README.md); V&V plan in
 [`validation_plan.md`](validation_plan.md).*
