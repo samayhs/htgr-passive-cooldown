@@ -2,6 +2,8 @@
 
 A project for **Radiant Nuclear**.
 
+> **Start here:** [`presentation/passive_cooldown.pdf`](presentation/passive_cooldown.pdf) — the assessment presentation. Full technical write-up in [`REPORT.md`](REPORT.md).
+
 ## What this is
 
 A 3D conjugate-heat-transfer model of an MHTGR-350 prismatic fuel block that answers one

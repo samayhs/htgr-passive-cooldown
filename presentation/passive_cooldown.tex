@@ -111,6 +111,9 @@
 \newcommand{\bignum}[3]{% color, number, label
   {\color{#1}\fontsize{26}{28}\selectfont\bfseries #2}\\[1pt]{\color{midGray}\footnotesize #3}}
 
+% citation superscript, keyed to the Sources slide
+\newcommand{\ct}[1]{\textsuperscript{\normalfont\color{midGray}\bfseries #1}}
+
 \begin{document}
 
 % ============================================================
@@ -176,8 +179,7 @@
 % ============================================================
 % SITUATION 1
 % ============================================================
-\begin{frame}{Situation}
-\eyebrow{Safety Question}
+\begin{frame}{Situation --- Safety Question}
 \begin{columns}[T]
 \begin{column}{0.58\textwidth}
 \begin{itemize}\setlength\itemsep{7pt}
@@ -220,8 +222,7 @@
 % ============================================================
 % SITUATION 2
 % ============================================================
-\begin{frame}{Situation}
-\eyebrow{Hottest at Full Power}
+\begin{frame}{Situation --- Hottest at Full Power}
 \begin{columns}[T]
 \begin{column}{0.55\textwidth}
 \begin{itemize}\setlength\itemsep{7pt}
@@ -229,8 +230,6 @@
   \item The graphite block keeps shedding stored heat to the reactor-cavity cooling system.
   \item So the peak is the operating value, reached at cooldown onset. The block cools monotonically after that.
 \end{itemize}
-\vspace{6pt}
-{\color{midGray}\footnotesize Even the benchmark full-core accident peak (about 1118\,\textcelsius) stays below the operating maximum.}
 \end{column}
 \begin{column}{0.45\textwidth}
 \centering
@@ -253,8 +252,7 @@
 % ============================================================
 % TASK
 % ============================================================
-\begin{frame}{Task}
-\eyebrow{Scope}
+\begin{frame}{Task --- Scope}
 \begin{columns}[T]
 \begin{column}{0.52\textwidth}
 \begin{tcolorbox}[bluebox]
@@ -287,8 +285,7 @@
 % ============================================================
 % ACTION 1 -- methodology
 % ============================================================
-\begin{frame}{Action}
-\eyebrow{Methodology}
+\begin{frame}{Action --- Methodology}
 \begin{columns}[T]
 \begin{column}{0.54\textwidth}
 A custom temperature-based CHT solver solves the solid directly in temperature:
@@ -317,8 +314,7 @@ $\rho\,C_p(T)\,\dfrac{\partial T}{\partial t} = \nabla\!\cdot\!(\kappa\nabla T) 
 % ============================================================
 % ACTION 2 -- geometry
 % ============================================================
-\begin{frame}{Action}
-\eyebrow{Geometry \& Mesh}
+\begin{frame}{Action --- Geometry \& Mesh}
 \begin{columns}[T]
 \begin{column}{0.42\textwidth}
 \centering
@@ -350,7 +346,7 @@ Mesh & 2.64\,M cells\\
 \end{tabular}}
 \vspace{6pt}
 
-{\color{midGray}\footnotesize Geometry matches the benchmark (porosity 0.186, 79.3\,cm element), cross-checked against NEA/NSC/R(2017)4.}
+{\color{midGray}\footnotesize Geometry matches the benchmark (porosity 0.186, 79.3\,cm element), cross-checked against NEA/NSC/R(2017)4\ct{1}.}
 \end{column}
 \end{columns}
 \end{frame}
@@ -358,9 +354,8 @@ Mesh & 2.64\,M cells\\
 % ============================================================
 % ACTION 3 -- inputs
 % ============================================================
-\begin{frame}{Action}
-\eyebrow{Inputs}
-{\color{midGray}\footnotesize All values trace to the OECD/NEA MHTGR-350 benchmark, report NEA/NSC/R(2017)4.}
+\begin{frame}{Action --- Inputs}
+{\color{midGray}\footnotesize All values trace to the OECD/NEA MHTGR-350 benchmark, report NEA/NSC/R(2017)4\ct{1}.}
 \vspace{8pt}
 
 \begin{columns}[T]
@@ -408,8 +403,9 @@ Conductivity $\kappa(T)$ & un-irradiated\\
 % ============================================================
 % ACTION 4 -- boundary conditions
 % ============================================================
-\begin{frame}{Action}
-\eyebrow{Boundary Conditions}
+\begin{frame}{Action --- Boundary Conditions}
+\vspace{2pt}
+
 {\small\renewcommand{\arraystretch}{1.35}
 \begin{tabular}{@{}p{3.0cm} p{4.3cm} p{4.7cm}@{}}
 \toprule
@@ -439,8 +435,7 @@ Axial ends & adiabatic & adiabatic\\
 % ============================================================
 % ACTION 5 -- assumptions
 % ============================================================
-\begin{frame}{Action}
-\eyebrow{Assumptions}
+\begin{frame}{Action --- Assumptions}
 \begin{columns}[T]
 \begin{column}{0.55\textwidth}
 \begin{itemize}\setlength\itemsep{8pt}\small
@@ -469,8 +464,7 @@ The depressurised case is the bounding conduction cooldown, so it needs no activ
 % ============================================================
 % RESULT 1 -- the prediction
 % ============================================================
-\begin{frame}{Result}
-\eyebrow{Prediction}
+\begin{frame}{Result --- Prediction}
 \begin{columns}[c]
 \begin{column}{0.47\textwidth}
 \centering
@@ -508,7 +502,7 @@ The depressurised case is the bounding conduction cooldown, so it needs no activ
 \end{columns}
 \vspace{14pt}
 
-{\small The peak-power column (\hot{$\times$1.85}) is the bounding safety number: within 1\% of the benchmark core max (1282\,\textcelsius), and above the full-core DCC peak (1118\,\textcelsius). The average column (\key{793\,\textcelsius}) validates the benchmark outlet. Both cool from their steady peak.}
+{\small The peak-power column (\hot{$\times$1.85}) is the bounding safety number: within 1\% of the benchmark core max (1282\,\textcelsius\ct{3}). The average column (\key{793\,\textcelsius}) validates the benchmark outlet. Both cool from their steady peak.}
 \end{column}
 \end{columns}
 \end{frame}
@@ -516,8 +510,7 @@ The depressurised case is the bounding conduction cooldown, so it needs no activ
 % ============================================================
 % RESULT 2 -- validation (steady + grid)
 % ============================================================
-\begin{frame}{Result}
-\eyebrow{Validation}
+\begin{frame}{Result --- Validation}
 \begin{columns}[T]
 \begin{column}{0.5\textwidth}
 {\small Four meshes spanning eight-fold in cell count, average-power column.}
@@ -536,7 +529,7 @@ The depressurised case is the bounding conduction cooldown, so it needs no activ
 \end{tabular}}
 \vspace{7pt}
 
-{\footnotesize Converged near second order (GCI about 1\%). Coolant outlet \hot{688\,\textcelsius} against the benchmark \key{687\,\textcelsius}, a 0.2\% agreement.}
+{\footnotesize Converged near second order (GCI about 1\%). Coolant outlet \hot{688\,\textcelsius} against the benchmark \key{687\,\textcelsius}\ct{1}, a 0.2\% agreement.}
 \end{column}
 \begin{column}{0.5\textwidth}
 \centering
@@ -565,8 +558,7 @@ The depressurised case is the bounding conduction cooldown, so it needs no activ
 % ============================================================
 % RESULT 3 -- verification (transient)
 % ============================================================
-\begin{frame}{Result}
-\eyebrow{Verification}
+\begin{frame}{Result --- Verification}
 {\color{RadNavy}\bfseries Energy conservation over the cooldown}
 \vspace{4pt}
 \begin{tcolorbox}[navybox]
@@ -579,8 +571,9 @@ $\displaystyle \Delta\!\!\int_V \rho h\,dV \;=\; \int_0^t\!\!\int_V q'''\,dV\,dt
 
 \begin{columns}[T]
 \begin{column}{0.55\textwidth}
-\begin{itemize}\setlength\itemsep{7pt}\small
-  \item Balance closes to \key{$<$0.25\%} ($\Delta U = -584$\,MJ), and \key{0.80\%} on the finest mesh.
+\begin{itemize}\setlength\itemsep{6pt}\small
+  \item Average column closes to \key{$<$0.25\%} ($\Delta U = -584$\,MJ), and \key{0.80\%} on the finest mesh.
+  \item Peak column closes to \key{1.84\%}, a $C_p$-discretisation effect that leaves the reported peak unaffected.
   \item \key{Time-step independent}: peak fuel 778.0\,\textcelsius\ at both time steps.
 \end{itemize}
 \end{column}
@@ -600,8 +593,7 @@ $\tau = \dfrac{\rho\,c\,V}{h_\text{rad}\,A} \approx 128\ \text{min}$
 % ============================================================
 % RESULT 4 -- accuracy assessment
 % ============================================================
-\begin{frame}{Result}
-\eyebrow{Accuracy}
+\begin{frame}{Result --- Accuracy}
 {\color{midGray}\footnotesize Direction of every bias, stated for the reader.}
 \vspace{7pt}
 
@@ -618,15 +610,14 @@ Un-irradiated conductivity & under-predicts & use irradiated $\kappa$\\
 \vspace{4pt}
 
 \begin{tcolorbox}[hotbox]
-\small The average column under-predicts, but the peak-power column (\hot{1268\,\textcelsius}) \key{brackets} the full-core DCC peak (1118\,\textcelsius) from above. Carry \hot{1268\,\textcelsius}, margin $\sim$332\,\textcelsius, as the bounding number; the 793\,\textcelsius\ average column validates the outlet.
+\small The average column under-predicts. Carry the peak-power column (\hot{1268\,\textcelsius}, $\approx$ benchmark core max, margin $\sim$332\,\textcelsius) as the bounding block-scale estimate. The block does not resolve the whole-core delayed peak, the next-fidelity step.
 \end{tcolorbox}
 \end{frame}
 
 % ============================================================
 % RESULT 5 -- limitations / next step
 % ============================================================
-\begin{frame}{Result}
-\eyebrow{Next Steps}
+\begin{frame}{Result --- Next Steps}
 \begin{columns}[T]
 \begin{column}{0.5\textwidth}
 {\color{RadNavy}\bfseries What is established}
@@ -638,14 +629,14 @@ Un-irradiated conductivity & under-predicts & use irradiated $\kappa$\\
 \vspace{9pt}
 {\color{RadNavy}\bfseries What it is not}
 \begin{itemize}\setlength\itemsep{5pt}\small
-  \item The block-scale cooldown peak is non-conservative: a lower bound, not the safety peak.
+  \item It resolves one block, not the annular core, so it does not produce the whole-core delayed peak.
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
 \vspace{6pt}
 \begin{tcolorbox}[bluebox]
 {\color{RadBlue}\bfseries Next step}\\[2pt]
-\footnotesize Restore the radial heat path with an effective-core model, moving the RCCS sink to the vessel boundary. That model can be compared directly against the benchmark full-core peak: 1391\,K at 50\,h, or 1237\,K at 74\,h for the ring model.
+\footnotesize Restore the radial heat path with an effective-core model, moving the RCCS sink to the vessel boundary. That model can be compared directly against the benchmark full-core peak: 1391\,K\ct{2} at 50\,h, or 1237\,K at 74\,h for the ring model.
 \end{tcolorbox}
 \vspace{7pt}
 {\color{midGray}\footnotesize This verified block model and its validated baseline are the foundation it builds on.}
@@ -654,27 +645,71 @@ Un-irradiated conductivity & under-predicts & use irradiated $\kappa$\\
 \end{frame}
 
 % ============================================================
-% CLOSING
+% SUMMARY (final content slide)
 % ============================================================
-{
-\setbeamertemplate{footline}{}
-\setbeamercolor{background canvas}{bg=RadNavy}
-\begin{frame}[plain]
-\begin{tikzpicture}[remember picture, overlay]
-  \fill[RadAmber] ([xshift=1.3cm,yshift=0.55cm]current page.west) rectangle ([xshift=1.42cm,yshift=2.3cm]current page.west);
-  \node[anchor=north west]
-        at ([xshift=1.7cm,yshift=2.25cm]current page.west)
-    {\begin{minipage}{12.5cm}\color{white}\fontsize{20}{25}\selectfont\bfseries
-       A validated 3D peak-fuel prediction, and the reasoning behind it.\end{minipage}};
-  \node[anchor=north west, text=RadBlueL, font=\small]
-        at ([xshift=1.75cm,yshift=-0.25cm]current page.west)
-    {1268\,\textcelsius\ bounding peak \quad $\sim$332\,\textcelsius\ margin \quad outlet 688 vs 687\,\textcelsius\ \quad energy under 0.8\%};
-  \node[anchor=west, text=white, font=\footnotesize\bfseries]
-        at ([xshift=1.75cm,yshift=-2.15cm]current page.west) {Samay Shah};
-  \node[anchor=east, text=RadAmber, font=\footnotesize]
-        at ([xshift=-1.4cm,yshift=-2.15cm]current page.east) {Questions welcome};
-\end{tikzpicture}
+\begin{frame}{Summary}
+\begin{tcolorbox}[navybox]
+{\color{RadNavy}\bfseries Peak fuel temperature during passive cooldown}
+\vspace{3pt}
+
+{\small\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}l l l@{}}
+& \textbf{Peak fuel} & \textbf{Margin to 1600\,\textcelsius}\\
+Peak-power column ($\times$1.85, hottest) & \hot{1268\,\textcelsius} & $\sim$332\,\textcelsius\\
+Average-power column & 793\,\textcelsius & $\sim$807\,\textcelsius\\
+\end{tabular}}
+\vspace{2pt}
+
+{\footnotesize Steady coolant outlet 688\,\textcelsius\ (benchmark 687\,\textcelsius); peak at cooldown onset, then monotonic cooldown.}
+\end{tcolorbox}
+\vspace{6pt}
+
+\begin{tcbraster}[raster columns=2, raster equal height=rows, raster column skip=6mm]
+\begin{tcolorbox}[bluebox]
+{\color{RadBlue}\bfseries Operating conditions}
+\vspace{2pt}
+
+{\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}l r@{}}
+Coolant, pressure & Helium, 6.39\,MPa\\
+Core inlet & 259\,\textcelsius, 18.8\,m/s\\
+Power density (avg) & 24.8\,MW/m$^3$\\
+Power density (peak) & 46.0\,MW/m$^3$\\
+Decay heat & ANS-5.1, $\sim$6\%\\
+\end{tabular}}
+\end{tcolorbox}
+\begin{tcolorbox}[tealbox]
+{\color{RadTeal}\bfseries Geometry}
+\vspace{2pt}
+
+{\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}l r@{}}
+Block & MHTGR-350 prismatic\\
+Across flats & 360\,mm\\
+Hole pitch & 18.8\,mm\\
+Fuel : coolant holes & 222 : 109\\
+Column & 8.0\,m, 10 blocks\\
+\end{tabular}}
+\end{tcolorbox}
+\end{tcbraster}
 \end{frame}
-}
+
+% ============================================================
+% SOURCES (backup)
+% ============================================================
+\begin{frame}{Sources}
+\vspace{10pt}
+\small
+{\color{RadBlue}\bfseries 1}\quad OECD/NEA MHTGR-350 benchmark, NEA/NSC/R(2017)4. Geometry, operating point, materials (Tables AIV.2--AIV.3), decay heat (\S\,I.7.4), and the steady coolant outlet (687\,\textcelsius).
+\vspace{11pt}
+
+{\color{RadBlue}\bfseries 2}\quad Strydom et al., INL. MHTGR-350 DCC/PCC transient reference results: the full-core delayed peak, 1391\,K at 50\,h (block) and 1237\,K at 74\,h (ring).
+\vspace{11pt}
+
+{\color{RadBlue}\bfseries 3}\quad MHTGR-350 steady multiphysics results: the core-maximum fuel temperature ($\approx$1282\,\textcelsius), a secondary reference band.
+\vspace{16pt}
+
+{\color{midGray}\footnotesize Benchmark values and page cites are catalogued in \texttt{benchmark/README.md}.}
+\end{frame}
 
 \end{document}
