@@ -19,6 +19,6 @@ cooldown — a pure verification step, no external reference needed.
 | Cooldown τ vs analytic lumped-capacitance | CFD ~121 min vs analytic 128 min (~5%) | pass (sanity) |
 
 Verifies the transient integrator the LOFC case rides on; the closure transfers across meshes.
-Full write-up: [`../../docs/peak_fuel_prediction.md`](../../docs/peak_fuel_prediction.md).
+Full write-up: [`../../REPORT.md`](../../REPORT.md).
 
 _Status: complete — PASS._

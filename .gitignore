@@ -29,6 +29,14 @@ __pycache__/
 # generated mesh metadata (written by make_full_block.py)
 geometry/fuel_zones.json
 
+# benchmark source documents (large external PDFs + their .txt extractions);
+# the distilled data used by the report is kept in benchmark/README.md
+benchmark/spec/
+benchmark/refs/
+
+# scratch / archived scripts, not part of the deliverable
+archive/
+
 # LaTeX build artifacts (keep only .tex source and compiled .pdf)
 *.aux
 *.log

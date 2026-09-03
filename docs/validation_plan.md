@@ -81,7 +81,7 @@ Phase 0 (steady) **complete, grid-converged** (4 meshes, GCI ~1%; outlet 688 °C
 Phase 1 (verification) **complete** — energy conservation <0.8% (avg column), Δt-independent.
 LOFC case **complete** (illustrative): **average column** peak ~793 °C, margin ~807 °C;
 **peak column** peak **1268 °C** (≈ benchmark core max 1282 °C), margin ~332 °C. Decay heat is
-the **ANS-5.1-family** curve. Full write-up: [`peak_fuel_prediction.md`](peak_fuel_prediction.md).
+the **ANS-5.1-family** curve. Full write-up: [`../REPORT.md`](../REPORT.md).
 
 ## Open items
 

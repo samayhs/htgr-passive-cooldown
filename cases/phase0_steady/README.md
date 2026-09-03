@@ -18,6 +18,6 @@ passive-cooldown results ride on a trusted baseline.
 
 Built from [`../../case_template/`](../../case_template/). Produces the **operating steady field**
 used as the IC for the LOFC cooldown ([`phase_lofc`](../phase_lofc/README.md)). Full write-up:
-[`../../docs/peak_fuel_prediction.md`](../../docs/peak_fuel_prediction.md).
+[`../../REPORT.md`](../../REPORT.md).
 
 _Status: complete (grid-converged; average + peak columns run)._

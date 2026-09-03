@@ -66,4 +66,4 @@ foamDictionary -entry qVol -set 46.05e6 constant/solid/heatSource   # peak-colum
 - Steady outlet and peak fuel are read from the reconstructed fluid/solid fields.
 
 Results and the full accuracy assessment are in
-[`docs/peak_fuel_prediction.md`](docs/peak_fuel_prediction.md).
+[`REPORT.md`](REPORT.md).
