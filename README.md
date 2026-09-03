@@ -2,7 +2,7 @@
 
 A project for **Radiant Nuclear**.
 
-> **Presentation** [`presentation/passive_cooldown.pdf`](presentation/passive_cooldown.pdf), the assessment presentation. Full technical write-up in [`REPORT.md`](REPORT.md).
+> **Presentation** [`presentation/passive_cooldown.pdf`](presentation/passive_cooldown.pdf). Full technical write-up in [`REPORT.md`](REPORT.md).
 
 ## Overview
 
