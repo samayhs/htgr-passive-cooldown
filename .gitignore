@@ -37,6 +37,16 @@ benchmark/refs/
 # scratch / archived scripts, not part of the deliverable
 archive/
 
+# AI assistant tooling (not part of the deliverable)
+.claude/
+CLAUDE.md
+.cursor/
+.cursorrules
+.aider*
+.continue/
+.codeium/
+.github/copilot-instructions.md
+
 # LaTeX build artifacts (keep only .tex source and compiled .pdf)
 *.aux
 *.log
