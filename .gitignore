@@ -28,3 +28,16 @@ __pycache__/
 
 # generated mesh metadata (written by make_full_block.py)
 geometry/fuel_zones.json
+
+# LaTeX build artifacts (keep only .tex source and compiled .pdf)
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+presentation/pass.log
